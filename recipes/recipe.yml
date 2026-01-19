@@ -57,13 +57,12 @@ modules:
 
   # 5. Flatpak Configuration (Enables Flathub)
   # This module configures the 'flatpak' engine we installed above to use Flathub.
+  # 5. Flatpak Configuration
   - type: default-flatpaks
-    notify: true
-    system:
-      - repo-url: https://dl.flathub.org/repo/flathub.flatpakrepo
-        repo-name: flathub
-        repo-title: "Flathub (system-wide)"
-      - install:
-        - com.github.tchx84.Flatseal # Essential for managing Flatpak permissions
+    configurations:
+      - container: system
+        notify: true
+        install:
+          - com.github.tchx84.Flatseal
 
   - type: signing
