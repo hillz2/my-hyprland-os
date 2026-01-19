@@ -17,13 +17,13 @@ modules:
       - git
       - wget
       - aria2
+      - tmux
       - zsh
       - vim-enhanced
       - htop
       - distrobox
       
       # --- Hyprland Ecosystem ---
-      - flatpak        # <--- Added here
       - hyprland
       - hypridle
       - hyprpaper
@@ -32,6 +32,7 @@ modules:
       - network-manager-applet
       
       # --- GUI Applications (Layered RPMs) ---
+      - flatpak
       - thunar
       - xarchiver
       - pavucontrol
@@ -40,6 +41,9 @@ modules:
       - gnome-calculator
       - mpv
       - eog            # Image Viewer (Eye of Gnome)
+
+      # --- HDD / SSD tool
+      - smartmontools
 
   # 4. Copy Config Files (Your Dotfiles)
   - type: files
