@@ -41,11 +41,6 @@ modules:
       - mpv
       - eog            # Image Viewer (Eye of Gnome)
 
-  # 3. Custom Scripts (Installing Wallust)
-  - type: script
-    scripts:
-      - install-wallust.sh
-
   # 4. Copy Config Files (Your Dotfiles)
   - type: files
     files:
