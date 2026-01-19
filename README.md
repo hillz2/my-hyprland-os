@@ -79,9 +79,19 @@ mkdir -p ~/config-backup
 
 ### Step 2: Copy New Configs
 Run this command to copy the included configurations to your active user folder:
-
+1. Move hyprland config files
 ```bash
 cp -r /etc/skel/.config/* ~/.config/
+```
+2. Move `.zshrc` and `.vimrc` to home directory
+```bash
+cp /etc/skel/.zshrc /etc/skel/.vimrc ~/
+```
+3. Move zsh plugins to home directory
+```bash
+mkdir -p ~/.local/share/zsh/plugins/
+cp /etc/skel/.local/share/zsh/plugins/zsh-autosuggestions.zsh ~/.local/share/zsh/plugins/
+cp /etc/skel/.local/share/zsh/plugins/zsh-syntax-highlighting.zsh ~/.local/share/zsh/plugins/
 ```
 
 ### Step 3: Switch Shell to Zsh (Optional)
