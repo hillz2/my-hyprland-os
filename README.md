@@ -1,5 +1,10 @@
 # my-hyprland-os
 
+<img width="1920" height="1080" alt="Screenshot_19-Jan_11-34-31_18840" src="https://github.com/user-attachments/assets/d1ba7d7d-733f-4aea-a380-24971e6e17f9" />
+
+<img width="1920" height="1080" alt="Screenshot_19-Jan_11-36-31_26751" src="https://github.com/user-attachments/assets/19feff0b-1487-47a1-97a9-00dc6aa5d063" />
+
+
 A custom, immutable Fedora Silverblue image built with BlueBuild. This image is pre-configured with a modern Hyprland desktop environment, essential CLI tools, and a suite of GUI applications.
 
 It is designed to be a "batteries-included" starting point for a Hyprland setup on an atomic Fedora base.
