@@ -32,7 +32,6 @@ modules:
       - network-manager-applet
       
       # --- GUI Applications (Layered RPMs) ---
-      - waterfox
       - thunar
       - xarchiver
       - pavucontrol
