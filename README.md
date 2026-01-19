@@ -1,43 +1,98 @@
-# BlueBuild Template &nbsp; [![bluebuild build badge](https://github.com/blue-build/template/actions/workflows/build.yml/badge.svg)](https://github.com/blue-build/template/actions/workflows/build.yml)
+# my-hyprland-os
 
-See the [BlueBuild docs](https://blue-build.org/how-to/setup/) for quick setup instructions for setting up your own repository based on this template.
+A custom, immutable Fedora Silverblue image built with BlueBuild. This image is pre-configured with a modern Hyprland desktop environment, essential CLI tools, and a suite of GUI applications.
 
-After setup, it is recommended you update this README to describe your custom image.
+It is designed to be a "batteries-included" starting point for a Hyprland setup on an atomic Fedora base.
 
-## Installation
+## 📦 What's Inside?
 
-> [!WARNING]  
-> [This is an experimental feature](https://www.fedoraproject.org/wiki/Changes/OstreeNativeContainerStable), try at your own discretion.
+### Base System
+* **Base Image:** `ghcr.io/ublue-os/silverblue-main:latest` (Fedora Silverblue)
+* **Shell:** Zsh (pre-installed)
+* **Editor:** Vim (vim-enhanced)
 
-To rebase an existing atomic Fedora installation to the latest build:
+### Desktop Environment (Hyprland Ecosystem)
+* **Window Manager:** Hyprland (Bleeding edge via Solopasha COPR)
+* **Terminal:** Kitty
+* **Launcher:** Rofi
+* **Wallpaper:** Hyprpaper
+* **Idle Daemon:** Hypridle
+* **Status Bar:** Waybar (Configuration files included in skeleton)
+* **System Tray:** Network Manager Applet
 
-- First rebase to the unsigned image, to get the proper signing keys and policies installed:
-  ```
-  rpm-ostree rebase ostree-unverified-registry:ghcr.io/blue-build/template:latest
-  ```
-- Reboot to complete the rebase:
-  ```
-  systemctl reboot
-  ```
-- Then rebase to the signed image, like so:
-  ```
-  rpm-ostree rebase ostree-image-signed:docker://ghcr.io/blue-build/template:latest
-  ```
-- Reboot again to complete the installation
-  ```
-  systemctl reboot
-  ```
+### Included Applications
+* **Browser:** Waterfox (via Flatpak)
+* **File Manager:** Thunar
+* **Archive Manager:** Xarchiver
+* **Media Player:** MPV
+* **Image Viewer:** Eye of GNOME (eog)
+* **Office/Calc:** Gnumeric, Gnome Calculator
+* **Audio Control:** Pavucontrol
+* **Text Editor:** Gnome Text Editor
+* **System Management:** Htop, Distrobox, Flatseal
 
-The `latest` tag will automatically point to the latest build. That build will still always use the Fedora version specified in `recipe.yml`, so you won't get accidentally updated to the next major version.
+### Custom Binaries
+* **Wallust:** Included directly in `/usr/bin/wallust` for generating color schemes from wallpapers.
 
-## ISO
+---
 
-If build on Fedora Atomic, you can generate an offline ISO with the instructions available [here](https://blue-build.org/learn/universal-blue/#fresh-install-from-an-iso). These ISOs cannot unfortunately be distributed on GitHub for free due to large sizes, so for public projects something else has to be used for hosting.
+## 🚀 Installation (Rebase)
 
-## Verification
+To switch to this image, run the following command. This downloads the image and prepares it for the next boot.
 
-These images are signed with [Sigstore](https://www.sigstore.dev/)'s [cosign](https://github.com/sigstore/cosign). You can verify the signature by downloading the `cosign.pub` file from this repo and running the following command:
+Note that we use `ostree-unverified-registry` for the initial switch. This is necessary because your system doesn't have the custom signing key for this image yet. **The key is embedded inside the image**, so once you reboot, future updates will be verified automatically.
 
 ```bash
-cosign verify --key cosign.pub ghcr.io/blue-build/template
+rpm-ostree rebase ostree-unverified-registry:ghcr.io/hillz2/my-hyprland-os:latest
+```
+
+Once the process completes, restart your system:
+
+```bash
+systemctl reboot
+```
+
+---
+
+## ⚙️ Configuration Setup (Post-Install)
+
+This image places default configuration files (dotfiles) into `/etc/skel/.config/`.
+**Linux only copies files from `/etc/skel` to your home directory when a NEW user is created.**
+
+If you are rebasing an **existing user**, you must manually copy these configurations to your home directory to apply them.
+
+### Step 1: Backup Existing Configs (Recommended)
+Before copying, it is good practice to back up your current settings to avoid data loss.
+
+```bash
+mkdir -p ~/config-backup
+[ -d ~/.config/hypr ] && mv ~/.config/hypr ~/config-backup/
+[ -d ~/.config/waybar ] && mv ~/.config/waybar ~/config-backup/
+[ -d ~/.config/kitty ] && mv ~/.config/kitty ~/config-backup/
+[ -d ~/.config/rofi ] && mv ~/.config/rofi ~/config-backup/
+```
+
+### Step 2: Copy New Configs
+Run this command to copy the included configurations to your active user folder:
+
+```bash
+cp -r /etc/skel/.config/* ~/.config/
+```
+
+### Step 3: Switch Shell to Zsh (Optional)
+If you want to use Zsh as your default shell:
+
+```bash
+lchsh $USER
+# Enter /usr/bin/zsh when prompted
+```
+
+---
+
+## 🔄 Updating
+
+To update your system in the future, simply run the standard upgrade command. This will pull the latest version of your custom image from GitHub Container Registry.
+
+```bash
+rpm-ostree upgrade
 ```
