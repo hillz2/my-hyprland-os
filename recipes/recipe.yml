@@ -8,8 +8,6 @@ modules:
   # 1. Add Third-Party Repositories
   - type: rpm-ostree
     repos:
-      # Waterfox Repo
-      - https://download.opensuse.org/repositories/home:/hawkeye116477:/waterfox/Fedora_%OS_VERSION%/home:hawkeye116477:waterfox.repo
       # Solopasha Hyprland (Recommended for bleeding edge Hyprland on Fedora)
       - https://copr.fedorainfracloud.org/coprs/solopasha/hyprland/repo/fedora-%OS_VERSION%/solopasha-hyprland-fedora-%OS_VERSION%.repo
 
@@ -64,5 +62,6 @@ modules:
         notify: true
         install:
           - com.github.tchx84.Flatseal
+          - net.waterfox.waterfox
 
   - type: signing
