@@ -1,7 +1,8 @@
 # recipes/recipe.yml
 name: my-hyprland-os
 description: Custom Silverblue with Hyprland, Zsh, and Vim
-base-image: ghcr.io/ublue-os/silverblue-main
+#base-image: ghcr.io/ublue-os/silverblue-main
+base-image: ghcr.io/wayblueorg/hyprland:latest
 image-version: latest
 
 modules:
