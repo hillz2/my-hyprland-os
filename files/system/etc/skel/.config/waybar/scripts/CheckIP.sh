@@ -5,6 +5,14 @@
 fetch_ip () {
     local url=$1
     local sel_ip=$2
+galih@wayblue ~ ➜ cat Dotfiles/waybar/scripts/CheckIP.sh
+#!/bin/bash
+
+# Function to fetch and parse IP data
+# Usage: fetch_ip "API_URL" "JQ_SELECTOR_IP" "JQ_SELECTOR_ISP" "JQ_SELECTOR_CC"
+fetch_ip () {
+    local url=$1
+    local sel_ip=$2
     local sel_isp=$3
     local sel_cc=$4
 
@@ -22,6 +30,14 @@ fetch_ip () {
     ip=$(echo "$ipinfo" | jq -r "$sel_ip")
     isp=$(echo "$ipinfo" | jq -r "$sel_isp")
     countryCode=$(echo "$ipinfo" | jq -r "$sel_cc")
+
+    # --- MODIFICATION START ---
+    # Check if ISP length is greater than 15
+    if [ "${#isp}" -gt 15 ]; then
+        # Take the first 15 chars and append "..."
+        isp="${isp:0:15}..."
+    fi
+    # --- MODIFICATION END ---
 
     # 4. Validate IP format
     if [[ $ip =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}$ ]]; then
@@ -42,7 +58,6 @@ fi
 
 # Attempt 2: ipapi.co (Backup - HTTPS)
 # Mapping: IP=.ip, ISP=.org, CC=.country_code
-# Note: Added -e check logic implicitly by falling through here
 echo "Primary API failed. Switching to backup (ipapi.co)..." >&2
 
 if fetch_ip "https://ipapi.co/json/" ".ip" ".org" ".country_code"; then
