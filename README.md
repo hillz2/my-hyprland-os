@@ -12,7 +12,7 @@ It is designed to be a "batteries-included" starting point for a Hyprland setup 
 ## 📦 What's Inside?
 
 ### Base System
-* **Base Image:** `ghcr.io/ublue-os/silverblue-main:latest` (Fedora Silverblue)
+* **Base Image:** `ghcr.io/wayblueorg/hyprland` (Fedora Atomic)
 * **Shell:** Zsh (pre-installed)
 * **Editor:** Vim (vim-enhanced)
 
