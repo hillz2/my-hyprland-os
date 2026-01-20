@@ -1,5 +1,5 @@
 # recipes/recipe.yml
-name: my-hyprland-os
+name: GalihOS
 description: Custom Wayblue with Zsh, Vim, Waterfox, and Tailscale
 base-image: ghcr.io/wayblueorg/hyprland
 image-version: latest
@@ -23,7 +23,6 @@ modules:
       - tailscale
 
       # --- GUI Applications ---
-      # Wayblue has the basics, adding your specific tools:
       - xarchiver
       - gnome-text-editor
       - gnumeric
@@ -34,7 +33,7 @@ modules:
       # --- HDD / SSD tool
       - smartmontools
 
-  # 2. Copy Config Files (Your Dotfiles)
+  # 2. Copy Config Files
   - type: files
     files:
       - source: system
@@ -49,10 +48,18 @@ modules:
           - com.github.tchx84.Flatseal
           - net.waterfox.waterfox
 
-  # 4. Systemd Services (Enable Tailscale automatically)
+  # 4. Systemd Services
   - type: systemd
     system:
       enabled:
         - tailscaled
+
+  # 5. Customize OS Name (Add this block!)
+  - type: os-release
+    name: GalihOS
+    id: galihos
+    version-id: "1.0"
+    variant: "Hyprland Edition"
+    variant-id: hyprland
 
   - type: signing
