@@ -58,8 +58,9 @@ modules:
   - type: os-release
     properties:
       NAME: "GalihOS"
+      PRETTY_NAME: "GalihOS (powered by Fedora Atomic) x86_64"
       ID: "galihos"
-      VERSION_ID: "1.0"
+      VERSION_ID: "2.0"
       VARIANT: "Hyprland Edition"
       VARIANT_ID: "hyprland"
 
