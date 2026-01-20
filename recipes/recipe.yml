@@ -56,7 +56,7 @@ modules:
 
   # 5. Customize OS Name
   - type: os-release
-    os-release:
+    properties:
       NAME: "GalihOS"
       ID: "galihos"
       VERSION_ID: "1.0"
