@@ -1,18 +1,12 @@
 # recipes/recipe.yml
 name: my-hyprland-os
-description: Custom Silverblue with Hyprland, Zsh, and Vim
-#base-image: ghcr.io/ublue-os/silverblue-main
-base-image: ghcr.io/wayblueorg/hyprland:latest
+description: Custom Wayblue with Zsh, Vim, Waterfox, and Tailscale
+base-image: ghcr.io/wayblueorg/hyprland
 image-version: latest
 
 modules:
-  # 1. Add Third-Party Repositories
+  # 1. Install RPM Packages
   - type: rpm-ostree
-    repos:
-      # Solopasha Hyprland (Recommended for bleeding edge Hyprland on Fedora)
-      - https://copr.fedorainfracloud.org/coprs/solopasha/hyprland/repo/fedora-%OS_VERSION%/solopasha-hyprland-fedora-%OS_VERSION%.repo
-
-    # 2. Install RPM Packages
     install:
       # --- Core & Shell ---
       - git
@@ -23,38 +17,30 @@ modules:
       - vim-enhanced
       - htop
       - distrobox
+      - fastfetch
       
-      # --- Hyprland Ecosystem ---
-      - hyprland
-      - hypridle
-      - hyprpaper
-      - rofi
-      - kitty
-      - network-manager-applet
-      
-      # --- GUI Applications (Layered RPMs) ---
-      - flatpak
-      - thunar
+      # --- Networking ---
+      - tailscale
+
+      # --- GUI Applications ---
+      # Wayblue has the basics, adding your specific tools:
       - xarchiver
-      - pavucontrol
       - gnome-text-editor
       - gnumeric
       - gnome-calculator
       - mpv
-      - eog            # Image Viewer (Eye of Gnome)
+      - eog            
 
       # --- HDD / SSD tool
       - smartmontools
 
-  # 4. Copy Config Files (Your Dotfiles)
+  # 2. Copy Config Files (Your Dotfiles)
   - type: files
     files:
       - source: system
         destination: /
 
-  # 5. Flatpak Configuration (Enables Flathub)
-  # This module configures the 'flatpak' engine we installed above to use Flathub.
-  # 5. Flatpak Configuration
+  # 3. Flatpak Configuration
   - type: default-flatpaks
     configurations:
       - container: system
@@ -62,5 +48,11 @@ modules:
         install:
           - com.github.tchx84.Flatseal
           - net.waterfox.waterfox
+
+  # 4. Systemd Services (Enable Tailscale automatically)
+  - type: systemd
+    system:
+      enabled:
+        - tailscaled
 
   - type: signing
