@@ -58,6 +58,20 @@ Once the process completes, restart your system:
 systemctl reboot
 ```
 
+Now switch to the signed image:
+
+```bash
+rpm-ostree rebase ostree-image-signed:docker://ghcr.io/hillz2/my-hyprland-os:latest
+```
+
+What happens next?
+
+After rebooting, if you run `rpm-ostree status`, you will see:
+
+```plaintext
+● ostree-image-signed:docker://ghcr.io/hillz2/my-hyprland-os:latest
+```
+
 ---
 
 ## ⚙️ Configuration Setup (Post-Install)
