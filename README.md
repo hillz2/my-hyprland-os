@@ -2,7 +2,8 @@
 
 <img width="1920" height="1080" alt="Screenshot_19-Jan_11-34-31_18840" src="https://github.com/user-attachments/assets/d1ba7d7d-733f-4aea-a380-24971e6e17f9" />
 
-<img width="1920" height="1080" alt="Screenshot_19-Jan_11-36-31_26751" src="https://github.com/user-attachments/assets/19feff0b-1487-47a1-97a9-00dc6aa5d063" />
+<img width="1920" height="1080" alt="Screenshot_20-Jan_14-07-19_24669" src="https://github.com/user-attachments/assets/38892d27-cd83-4993-905b-fd8d03f3df08" />
+
 
 
 A custom, immutable Fedora Silverblue image built with BlueBuild. This image is pre-configured with a modern Hyprland desktop environment, essential CLI tools, and a suite of GUI applications.
