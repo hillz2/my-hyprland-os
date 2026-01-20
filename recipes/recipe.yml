@@ -1,5 +1,5 @@
 # recipes/recipe.yml
-name: GalihOS
+name: my-hyprland-os
 description: Custom Wayblue with Zsh, Vim, Waterfox, and Tailscale
 base-image: ghcr.io/wayblueorg/hyprland
 image-version: latest
@@ -54,12 +54,13 @@ modules:
       enabled:
         - tailscaled
 
-  # 5. Customize OS Name (Add this block!)
+  # 5. Customize OS Name
   - type: os-release
-    name: GalihOS
-    id: galihos
-    version-id: "1.0"
-    variant: "Hyprland Edition"
-    variant-id: hyprland
+    os-release:
+      NAME: "GalihOS"
+      ID: "galihos"
+      VERSION_ID: "1.0"
+      VARIANT: "Hyprland Edition"
+      VARIANT_ID: "hyprland"
 
   - type: signing
