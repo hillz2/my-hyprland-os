@@ -57,11 +57,12 @@ modules:
   # 5. Customize OS Name
   - type: os-release
     properties:
-      NAME: "GalihOS"
+      NAME: "Fedora Linux"
       PRETTY_NAME: "GalihOS (powered by Fedora Atomic) x86_64"
       ID: "galihos"
       VERSION_ID: "2.0"
       VARIANT: "Hyprland Edition"
       VARIANT_ID: "hyprland"
+      DEFAULT_HOSTNAME: "GalihOS"
 
   - type: signing
