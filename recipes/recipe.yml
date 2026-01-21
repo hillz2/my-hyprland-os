@@ -121,9 +121,10 @@ modules:
   # 5. Customize OS Name
   - type: os-release
     properties:
-      NAME: "Fedora Linux"
+      NAME: "GalihOS"
       PRETTY_NAME: "GalihOS (Silverblue Hyprland) x86_64"
       ID: "galihos"
+      ID_LIKE: fedora
       VERSION_ID: "2.0"
       VARIANT: "Hyprland Edition"
       VARIANT_ID: "hyprland"
