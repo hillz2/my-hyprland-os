@@ -15,7 +15,7 @@ It is designed to be a "batteries-included" starting point for a Hyprland setup 
 ## 📦 What's Inside?
 
 ### Base System
-* **Base Image:** `ghcr.io/wayblueorg/hyprland` (Fedora Atomic)
+* **Base Image:** `ghcr.io/ublue-os/silverblue-main` (Fedora Silverblue)
 * **Shell:** Zsh (pre-installed)
 * **Editor:** Vim (vim-enhanced)
 
@@ -127,22 +127,7 @@ Here are some of the essential keybindings configured in this image (via `UserKe
 | Key Combination | Action |
 | :--- | :--- |
 | `SUPER` + `D` | App Launcher (Rofi) |
-| `SUPER` + `Return` | Terminal |
-| `SUPER` + `E` | File Manager |
-| `SUPER` + `B` | Default Browser |
-| `SUPER` + `H` | Key Hints / Cheat Sheet |
-| `SUPER` + `S` | Google Search (via Rofi) |
-| `SUPER` + `W` | Wallpaper Select |
-| `SUPER` + `Shift` + `W` | Wallpaper Effects |
-| `CTRL` + `ALT` + `W` | Random Wallpaper |
-| `SUPER` + `Shift` + `F` | Fullscreen |
-| `SUPER` + `Space` | Toggle Floating Mode |
-| `SUPER` + `Shift` + `Return` | Dropdown Terminal |
-| `SUPER` + `Alt` + `V` | Clipboard Manager |
-| `SUPER` + `Alt` + `C` | Calculator |
-| `SUPER` + `Shift` + `M` | Rofi Beats (Online Music) |
-| `SUPER` + `Ctrl` + `B` | Waybar Styles Menu |
-| `SUPER` + `Alt` + `B` | Waybar Layout Menu |
+| `SUPER` + `Enter` | Terminal |
 | `SUPER` + `Alt` + `R` | Refresh Waybar & Rofi |
 
 For a full list of keybindings, check `~/.config/hypr/UserConfigs/UserKeybinds.conf` and `~/.config/hypr/configs/Keybinds.conf`.
