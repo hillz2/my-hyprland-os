@@ -1,12 +1,27 @@
 # recipes/recipe.yml
 name: my-hyprland-os
-description: Custom Wayblue with Zsh, Vim, Waterfox, and Tailscale
-base-image: ghcr.io/wayblueorg/hyprland
+description: Custom Silverblue with Hyprland (replacing GNOME)
+base-image: ghcr.io/ublue-os/silverblue-main
 image-version: latest
 
 modules:
+  # 0. Enable COPR for Hyprland extras
+  - type: script
+    scripts:
+      - enable_copr.sh
+
   # 1. Install RPM Packages
   - type: rpm-ostree
+    # Remove GNOME bits to "de-gnome" the image
+    remove:
+      - firefox # Replacing with Waterfox (Flatpak)
+      - firefox-langpacks
+      - gdm # Replacing with SDDM
+      - gnome-shell
+      - gnome-software
+      - gnome-terminal # Replacing with Kitty
+      - nautilus # Replacing with Thunar
+    
     install:
       # --- Core & Shell ---
       - git
@@ -18,6 +33,38 @@ modules:
       - htop
       - distrobox
       - fastfetch
+      - jq
+      - parallel
+      
+      # --- Hyprland Ecosystem ---
+      - hyprland
+      - hyprpaper
+      - hyprlock
+      - hypridle
+      - waybar
+      - rofi-wayland
+      - swaync
+      - wlogout
+      - grim
+      - slurp
+      - wl-clipboard
+      - swappy
+      - cliphist
+      - nwg-displays
+      - nwg-look
+      - polkit-gnome
+      - network-manager-applet
+      - blueman
+      - swww # From COPR
+      
+      # --- Theming/Qt ---
+      - sddm
+      - qt5-qtgraphicaleffects
+      - qt5-qtquickcontrols2
+      - qt5-qtsvg
+      - qt5ct
+      - qt6ct
+      - kvantum
       
       # --- Networking ---
       - tailscale
@@ -29,6 +76,12 @@ modules:
       - gnome-calculator
       - mpv
       - eog            
+      - thunar
+      - pavucontrol
+      - brightnessctl
+      - playerctl
+      - pamixer
+      - yad
 
       # --- HDD / SSD tool
       - smartmontools
@@ -53,12 +106,15 @@ modules:
     system:
       enabled:
         - tailscaled
+        - sddm
+      disabled:
+        - gdm
 
   # 5. Customize OS Name
   - type: os-release
     properties:
       NAME: "Fedora Linux"
-      PRETTY_NAME: "GalihOS (powered by Fedora Atomic) x86_64"
+      PRETTY_NAME: "GalihOS (Silverblue Hyprland) x86_64"
       ID: "galihos"
       VERSION_ID: "2.0"
       VARIANT: "Hyprland Edition"
