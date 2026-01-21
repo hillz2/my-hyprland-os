@@ -17,10 +17,11 @@ modules:
       - firefox # Replacing with Waterfox (Flatpak)
       - firefox-langpacks
       - gdm # Replacing with SDDM
+      - gnome-initial-setup # Depends on GDM
       - gnome-shell
+      - gnome-shell-extension-common # Depends on gnome-shell
       - gnome-software
       - ptyxis # Replacing with Kitty
-      - nautilus # Replacing with Thunar
     
     install:
       # --- Core & Shell ---
@@ -76,7 +77,6 @@ modules:
       - gnome-calculator
       - mpv
       - eog            
-      - thunar
       - pavucontrol
       - brightnessctl
       - playerctl
