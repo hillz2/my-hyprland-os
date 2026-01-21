@@ -20,6 +20,9 @@ modules:
       - gnome-initial-setup # Depends on GDM
       - gnome-shell
       - gnome-shell-extension-common # Depends on gnome-shell
+      - gnome-shell-extension-background-logo
+      - gnome-shell-extension-window-list
+      - gnome-browser-connector
       - gnome-software
       - ptyxis # Replacing with Kitty
     
