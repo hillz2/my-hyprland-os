@@ -52,7 +52,7 @@ modules:
       - cliphist
       - nwg-displays
       - nwg-look
-      - polkit-gnome
+      - lxpolkit
       - network-manager-applet
       - blueman
       - swww # From COPR
