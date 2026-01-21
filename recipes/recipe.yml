@@ -73,6 +73,9 @@ modules:
       - sddm
       - adwaita-gtk2-theme
       - adwaita-icon-theme
+      - adw-gtk3-theme
+      - adwaita-qt5
+      - adwaita-qt6
       - gnome-themes-extra
       - bibata-cursor-themes
       - abattis-cantarell-fonts
