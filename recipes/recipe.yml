@@ -74,6 +74,8 @@ modules:
       - adwaita-gtk2-theme
       - adwaita-icon-theme
       - gnome-themes-extra
+      - bibata-cursor-themes
+      - cantarell-fonts
       - qt5-qtgraphicaleffects
       - qt5-qtquickcontrols2
       - qt5-qtsvg

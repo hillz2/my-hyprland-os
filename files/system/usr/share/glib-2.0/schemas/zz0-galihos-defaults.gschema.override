@@ -1,0 +1,8 @@
+[org.gnome.desktop.interface]
+color-scheme='prefer-dark'
+gtk-theme='Adwaita-dark'
+icon-theme='Adwaita'
+cursor-theme='Bibata-Modern-Ice'
+font-name='Cantarell 11'
+document-font-name='Cantarell 11'
+monospace-font-name='JetBrainsMono Nerd Font 10'
