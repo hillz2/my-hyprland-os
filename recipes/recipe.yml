@@ -19,7 +19,7 @@ modules:
       - gdm # Replacing with SDDM
       - gnome-shell
       - gnome-software
-      - gnome-terminal # Replacing with Kitty
+      - ptyxis # Replacing with Kitty
       - nautilus # Replacing with Thunar
     
     install:
