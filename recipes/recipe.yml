@@ -27,6 +27,7 @@ modules:
       - gnome-shell-extension-places-menu
       - gnome-classic-session
       - gnome-shell-extension-launch-new-instance
+      - gnome-shell-extension-apps-menu
       - gnome-software
       - ptyxis # Replacing with Kitty
     
