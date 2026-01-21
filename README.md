@@ -118,6 +118,35 @@ lchsh $USER
 
 ---
 
+## ⌨️ Keybindings
+
+Here are some of the essential keybindings configured in this image (via `UserKeybinds.conf`). `SUPER` key is usually the Windows key.
+
+| Key Combination | Action |
+| :--- | :--- |
+| `SUPER` + `D` | App Launcher (Rofi) |
+| `SUPER` + `Return` | Terminal |
+| `SUPER` + `E` | File Manager |
+| `SUPER` + `B` | Default Browser |
+| `SUPER` + `H` | Key Hints / Cheat Sheet |
+| `SUPER` + `S` | Google Search (via Rofi) |
+| `SUPER` + `W` | Wallpaper Select |
+| `SUPER` + `Shift` + `W` | Wallpaper Effects |
+| `CTRL` + `ALT` + `W` | Random Wallpaper |
+| `SUPER` + `Shift` + `F` | Fullscreen |
+| `SUPER` + `Space` | Toggle Floating Mode |
+| `SUPER` + `Shift` + `Return` | Dropdown Terminal |
+| `SUPER` + `Alt` + `V` | Clipboard Manager |
+| `SUPER` + `Alt` + `C` | Calculator |
+| `SUPER` + `Shift` + `M` | Rofi Beats (Online Music) |
+| `SUPER` + `Ctrl` + `B` | Waybar Styles Menu |
+| `SUPER` + `Alt` + `B` | Waybar Layout Menu |
+| `SUPER` + `Alt` + `R` | Refresh Waybar & Rofi |
+
+For a full list of keybindings, check `~/.config/hypr/UserConfigs/UserKeybinds.conf` and `~/.config/hypr/configs/Keybinds.conf`.
+
+---
+
 ## 🔄 Updating
 
 To update your system in the future, simply run the standard upgrade command. This will pull the latest version of your custom image from GitHub Container Registry.
