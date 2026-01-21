@@ -34,7 +34,7 @@ It is designed to be a "batteries-included" starting point for a Hyprland setup 
 * **Archive Manager:** Xarchiver
 * **Media Player:** MPV
 * **Image Viewer:** Eye of GNOME (eog)
-* **Office/Calc:** Gnumeric, Gnome Calculator
+* **Calc:** Gnome Calculator
 * **Audio Control:** Pavucontrol
 * **Text Editor:** Gnome Text Editor
 * **System Management:** Htop, Distrobox, Flatseal
