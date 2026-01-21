@@ -91,7 +91,6 @@ modules:
       # --- GUI Applications ---
       - xarchiver
       - gnome-text-editor
-      - gnumeric
       - gnome-calculator
       - mpv
       - eog            
