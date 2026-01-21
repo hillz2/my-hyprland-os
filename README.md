@@ -2,7 +2,8 @@
 
 <img width="1920" height="1080" alt="Screenshot_19-Jan_11-34-31_18840" src="https://github.com/user-attachments/assets/d1ba7d7d-733f-4aea-a380-24971e6e17f9" />
 
-<img width="1920" height="1080" alt="Screenshot_20-Jan_14-07-19_24669" src="https://github.com/user-attachments/assets/38892d27-cd83-4993-905b-fd8d03f3df08" />
+<img width="1920" height="1080" alt="Screenshot_21-Jan_21-45-48_22285" src="https://github.com/user-attachments/assets/e9f696d4-0cc8-4731-9153-b2517856630a" />
+
 
 
 
