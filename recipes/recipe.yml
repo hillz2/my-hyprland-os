@@ -38,6 +38,8 @@ modules:
       - aria2
       - tmux
       - zsh
+      - zsh-autosuggestions
+      - zsh-syntax-highlighting
       - vim-enhanced
       - htop
       - distrobox
@@ -47,6 +49,7 @@ modules:
       
       # --- Hyprland Ecosystem ---
       - hyprland
+      - hyprland-qtutils
       - hyprpaper
       - hyprlock
       - hypridle
@@ -109,7 +112,13 @@ modules:
           - com.github.tchx84.Flatseal
           - net.waterfox.waterfox
 
-  # 4. Systemd Services
+  # 4. Fonts
+  - type: fonts
+    fonts:
+      nerd-fonts:
+        - JetBrainsMono
+
+  # 5. Systemd Services
   - type: systemd
     system:
       enabled:
@@ -118,7 +127,7 @@ modules:
       disabled:
         - gdm
 
-  # 5. Customize OS Name
+  # 6. Customize OS Name
   - type: os-release
     properties:
       NAME: "GalihOS"

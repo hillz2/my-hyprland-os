@@ -1,6 +1,6 @@
 # Plugins (Installed in Home for Silverblue compatibility)
-source ~/.local/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.local/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # --- History Configuration ---
 # it makes zsh-autosuggestions remember a lot more commands
