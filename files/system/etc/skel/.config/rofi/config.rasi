@@ -5,4 +5,5 @@ configuration {
     drun-display-format: "{name}";
 }
 
-@theme "themes/catppuccin-mocha"
+// @theme "themes/catppuccin-mocha"
+@theme "themes/catppuccin-wallust"

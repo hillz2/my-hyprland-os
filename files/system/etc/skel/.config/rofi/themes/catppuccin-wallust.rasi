@@ -1,0 +1,129 @@
+/* 1. Import your Wallust colors */
+@import "../wallust/colors-rofi.rasi"
+
+/* 2. Map Wallust variables to Catppuccin names */
+* {
+    /* -- Mappings -- */
+    /* defined in wallust file: normal-background: #111112; */
+    base:           @normal-background; 
+    text:           @foreground;
+    subtext0:       @color8;
+    
+    /* Surface colors */
+    surface0:       @color0;
+    surface1:       @color1;
+    surface2:       @selected-normal-background;
+
+    /* Accents */
+    mauve:          @border-color;
+    green:          @color4;
+    red:            @urgent-background;
+    teal:           @active-background;
+    
+    /* Fixed: Map crust to normal-background to avoid circular loop */
+    crust:          @normal-background;
+
+    /* -- Global Settings -- */
+    /* Fixed: Removed circular 'background-color: @base' line. 
+       The import already sets a global background-color. */
+       
+    text-color:       @text;
+    font: "JetBrainsMono Nerd Font Mono 12";
+}
+
+/* 3. Original Layout Rules */
+
+window {
+    width: 600px;
+    border: 2px;
+    border-color: @mauve;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: @base;
+}
+
+mainbox {
+    children: [inputbar, listview];
+    spacing: 15px;
+}
+
+inputbar {
+    children: [prompt, entry];
+    background-color: @surface0;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+prompt {
+    text-color: @green;
+}
+
+entry {
+    placeholder: "Search...";
+    placeholder-color: @subtext0;
+}
+
+listview {
+    columns: 1;
+    lines: 8;
+    cycle: true;
+    dynamic: true;
+    layout: vertical;
+}
+
+element {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+element-text {
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+element.normal.normal {
+    background-color: @surface1;
+    text-color: @text;
+}
+
+element.normal.urgent {
+    background-color: @red;
+    text-color: @crust;
+}
+
+element.normal.active {
+    background-color: @teal;
+    text-color: @crust;
+}
+
+element.selected.normal {
+    background-color: @surface2;
+    text-color: @text;
+    border: 1px;
+    border-color: @mauve;
+}
+
+element.selected.urgent {
+    background-color: @red;
+    text-color: @crust;
+}
+
+element.selected.active {
+    background-color: @teal;
+    text-color: @crust;
+}
+
+element.alternate.normal {
+    background-color: @surface0;
+    text-color: @text;
+}
+
+element.alternate.urgent {
+    background-color: @red;
+    text-color: @crust;
+}
+
+element.alternate.active {
+    background-color: @teal;
+    text-color: @crust;
+}
