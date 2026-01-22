@@ -1,7 +1,6 @@
-# recipes/recipe.yml
 name: my-hyprland-os
-description: Custom Silverblue with Hyprland (replacing GNOME)
-base-image: ghcr.io/ublue-os/silverblue-main
+description: Custom ublue-os base with Hyprland
+base-image: ghcr.io/ublue-os/base-main
 image-version: latest
 
 modules:
@@ -12,25 +11,6 @@ modules:
 
   # 1. Install RPM Packages
   - type: rpm-ostree
-    # Remove GNOME bits to "de-gnome" the image
-    remove:
-      - firefox # Replacing with Waterfox (Flatpak)
-      - firefox-langpacks
-      - gdm # Replacing with SDDM
-      - gnome-initial-setup # Depends on GDM
-      - gnome-shell
-      - gnome-shell-extension-common # Depends on gnome-shell
-      - gnome-shell-extension-background-logo
-      - gnome-shell-extension-window-list
-      - gnome-browser-connector
-      - gnome-session-wayland-session
-      - gnome-shell-extension-places-menu
-      - gnome-classic-session
-      - gnome-shell-extension-launch-new-instance
-      - gnome-shell-extension-apps-menu
-      - gnome-software
-      - ptyxis # Replacing with Kitty
-    
     install:
       # --- Core & Shell ---
       - git
@@ -49,10 +29,10 @@ modules:
       
       # --- Hyprland Ecosystem ---
       - hyprland
-      - hyprland-qtutils
       - hyprpaper
       - hyprlock
       - hypridle
+      - hyprland-qtutils
       - waybar
       - rofi-wayland
       - swaync
@@ -67,7 +47,6 @@ modules:
       - lxpolkit
       - network-manager-applet
       - blueman
-      - swww # From COPR
       
       # --- Theming/Qt ---
       - sddm
@@ -100,6 +79,55 @@ modules:
       - pamixer
       - yad
 
+      # --- Missing Dependencies (Added for base-main) ---
+      - nautilus
+      - gvfs
+      - gvfs-mtp # Android phone file transfer
+      - gvfs-smb # Network file sharing (SMB/CIFS)
+      - gnome-keyring
+      - kitty
+      - polkit
+      - xdg-user-dirs # Standardizes /home folders (Downloads, Pictures, etc.)
+
+      # --- Portals (Critical for Hyprland/Flatpaks) ---
+      - xdg-desktop-portal-hyprland # Screen sharing, recording, Wayland features
+      - xdg-desktop-portal-gtk # Fallback file picker and theme integration
+
+      # --- Archives & Thumbnails ---
+      - unzip
+      - zip
+      - p7zip
+      - p7zip-plugins # Handles .rar extraction (replacing unrar)
+      - tar
+      - xz
+      - bzip2
+      - gzip
+      - ffmpegthumbnailer # Video thumbnails in Nautilus
+
+      # --- Codecs & Multimedia ---
+      - gstreamer1-plugins-ugly-free
+      - gstreamer1-plugins-bad-free-extras
+      - gstreamer1-vaapi # Hardware acceleration
+      # Note: Full ffmpeg requires RPM Fusion, not added here to keep it pure Fedora for now
+
+      # --- Fonts (Base & Emojis) ---
+      - google-noto-emoji-fonts # Fixes broken emojis in apps
+      - rsms-inter-fonts # Modern UI font
+      
+      # Sound
+      - pipewire
+      - wireplumber
+      - pipewire-alsa
+      - pipewire-pulseaudio
+      - pipewire-utils # CLI tools (pw-top, etc.)
+
+      # Network/Bluetooth
+      - NetworkManager
+      - NetworkManager-tui
+      - NetworkManager-wifi
+      - bluez
+      - bluez-cups
+
       # --- HDD / SSD tool
       - smartmontools
 
@@ -130,14 +158,14 @@ modules:
       enabled:
         - tailscaled
         - sddm
-      disabled:
-        - gdm
+        - NetworkManager
+        - bluetooth
 
   # 6. Customize OS Name
   - type: os-release
     properties:
       NAME: "GalihOS"
-      PRETTY_NAME: "GalihOS (Silverblue Hyprland) x86_64"
+      PRETTY_NAME: "GalihOS (ublue-os with hyprland) x86_64"
       ID: "galihos"
       ID_LIKE: fedora
       VERSION_ID: "2.0"

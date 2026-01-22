@@ -44,34 +44,20 @@ It is designed to be a "batteries-included" starting point for a Hyprland setup 
 
 ---
 
-## 🚀 Installation (Rebase)
+## 🚀 Installation (Rebase to testing image)
 
 To switch to this image, run the following command. This downloads the image and prepares it for the next boot.
 
 Note that we use `ostree-unverified-registry` for the initial switch. This is necessary because your system doesn't have the custom signing key for this image yet. **The key is embedded inside the image**, so once you reboot, future updates will be verified automatically.
 
 ```bash
-rpm-ostree rebase ostree-unverified-registry:ghcr.io/hillz2/my-hyprland-os:latest
+rpm-ostree rebase ostree-unverified-registry:ghcr.io/hillz2/my-hyprland-os:br-testing-43
 ```
 
 Once the process completes, restart your system:
 
 ```bash
 systemctl reboot
-```
-
-Now switch to the signed image:
-
-```bash
-rpm-ostree rebase ostree-image-signed:docker://ghcr.io/hillz2/my-hyprland-os:latest
-```
-
-What happens next?
-
-After rebooting, if you run `rpm-ostree status`, you will see:
-
-```plaintext
-● ostree-image-signed:docker://ghcr.io/hillz2/my-hyprland-os:latest
 ```
 
 ---
