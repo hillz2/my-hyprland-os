@@ -1,5 +1,5 @@
 name: my-hyprland-os
-description: Custom Fedora Base  with Hyprland (replacing GNOME)
+description: Custom ublue-os base with Hyprland
 base-image: ghcr.io/ublue-os/base-main
 image-version: latest
 
@@ -165,7 +165,7 @@ modules:
   - type: os-release
     properties:
       NAME: "GalihOS"
-      PRETTY_NAME: "GalihOS (Fedora Base with Hyprland) x86_64"
+      PRETTY_NAME: "GalihOS (ublue-os with hyprland) x86_64"
       ID: "galihos"
       ID_LIKE: fedora
       VERSION_ID: "2.0"
