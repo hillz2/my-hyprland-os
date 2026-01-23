@@ -1,0 +1,45 @@
+name: Build ISO
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 2 * *'
+
+jobs:
+  build-iso:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+      id-token: write
+    steps:
+      - name: Lowercase Registry
+        id: registry_case
+        run: |
+          echo "repo=${GITHUB_REPOSITORY_OWNER,,}" >> $GITHUB_OUTPUT
+
+      - name: Get Date
+        id: date
+        run: echo "date=$(date +'%d-%m-%Y_%H-%M')" >> $GITHUB_OUTPUT
+
+      - name: Build ISO
+        uses: jasonn3/build-container-installer@v1.2.4
+        with:
+          arch: x86_64
+          image_name: my-hyprland-os
+          image_repo: ghcr.io/${{ steps.registry_case.outputs.repo }}
+          image_tag: latest
+          version: 41 # Builds an installer based on Fedora 41 (adjust if needed)
+          variant: silverblue
+          iso_name: galih-os_${{ steps.date.outputs.date }}.iso
+
+      - name: Upload Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: GalihOS ISO ${{ steps.date.outputs.date }}
+          tag_name: iso-${{ steps.date.outputs.date }}
+          files: |
+            galih-os_${{ steps.date.outputs.date }}.iso
+            galih-os_${{ steps.date.outputs.date }}.iso-CHECKSUM
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
