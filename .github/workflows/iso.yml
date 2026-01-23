@@ -33,13 +33,12 @@ jobs:
           variant: silverblue
           iso_name: galih-os_${{ steps.date.outputs.date }}.iso
 
-      - name: Upload Release
-        uses: softprops/action-gh-release@v1
+      - name: Upload ISO Artifact
+        uses: actions/upload-artifact@v4
         with:
-          name: GalihOS ISO ${{ steps.date.outputs.date }}
-          tag_name: iso-${{ steps.date.outputs.date }}
-          files: |
+          name: galih-os-iso-${{ steps.date.outputs.date }}
+          path: |
             galih-os_${{ steps.date.outputs.date }}.iso
             galih-os_${{ steps.date.outputs.date }}.iso-CHECKSUM
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          if-no-files-found: error
+          retention-days: 5
