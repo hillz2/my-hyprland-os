@@ -160,6 +160,7 @@ modules:
         - sddm
         - NetworkManager
         - bluetooth
+        - rpm-ostreed-automatic.timer
 
   # 6. Customize OS Name
   - type: os-release
