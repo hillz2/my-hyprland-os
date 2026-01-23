@@ -33,17 +33,12 @@ jobs:
           variant: silverblue
           iso_name: galih-os_${{ steps.date.outputs.date }}.iso
 
-      - name: Compress ISO
-        run: |
-          xz -c -z -T0 galih-os_${{ steps.date.outputs.date }}.iso > galih-os_${{ steps.date.outputs.date }}.iso.xz
-          sudo rm galih-os_${{ steps.date.outputs.date }}.iso
-
       - name: Upload ISO Artifact
         uses: actions/upload-artifact@v4
         with:
           name: galih-os-iso-${{ steps.date.outputs.date }}
           path: |
-            galih-os_${{ steps.date.outputs.date }}.iso.xz
+            galih-os_${{ steps.date.outputs.date }}.iso
             galih-os_${{ steps.date.outputs.date }}.iso-CHECKSUM
           if-no-files-found: error
           retention-days: 5
