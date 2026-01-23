@@ -8,14 +8,14 @@
 
 
 
-A custom, immutable Fedora Silverblue image built with BlueBuild. This image is pre-configured with a modern Hyprland desktop environment, essential CLI tools, and a suite of GUI applications.
+A custom, immutable uBlue base image built with BlueBuild. This image is pre-configured with a modern Hyprland desktop environment, essential CLI tools, and a suite of GUI applications.
 
 It is designed to be a "batteries-included" starting point for a Hyprland setup on an atomic Fedora base.
 
 ## 📦 What's Inside?
 
 ### Base System
-* **Base Image:** `ghcr.io/ublue-os/silverblue-main` (Fedora Silverblue)
+* **Base Image:** `ghcr.io/ublue-os/base-main` (uBlue base image)
 * **Shell:** Zsh (pre-installed)
 * **Editor:** Vim (vim-enhanced)
 
@@ -30,7 +30,7 @@ It is designed to be a "batteries-included" starting point for a Hyprland setup 
 
 ### Included Applications
 * **Browser:** Waterfox (via Flatpak)
-* **File Manager:** Thunar
+* **File Manager:** Nautilus
 * **Archive Manager:** Xarchiver
 * **Media Player:** MPV
 * **Image Viewer:** Eye of GNOME (eog)
