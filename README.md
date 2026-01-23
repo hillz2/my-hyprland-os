@@ -141,3 +141,6 @@ To update your system in the future, simply run the standard upgrade command. Th
 ```bash
 rpm-ostree upgrade
 ```
+
+## ♯ Notes
+1. The `image-base` in `recipes/recipe.yml` uses the tag `latest` and it updates the base image daily, as a result, your daily update size is huge so I changed the update frequency to once a month. The file responsible for this behaviour is located at `files/system/etc/systemd/system/rpm-ostreed-automatic.timer.d/override.conf`
