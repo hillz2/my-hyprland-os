@@ -35,7 +35,8 @@ jobs:
 
       - name: Compress ISO
         run: |
-          xz -z -T0 galih-os_${{ steps.date.outputs.date }}.iso
+          xz -c -z -T0 galih-os_${{ steps.date.outputs.date }}.iso > galih-os_${{ steps.date.outputs.date }}.iso.xz
+          sudo rm galih-os_${{ steps.date.outputs.date }}.iso
 
       - name: Upload ISO Artifact
         uses: actions/upload-artifact@v4
