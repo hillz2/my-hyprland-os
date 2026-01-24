@@ -13,123 +13,123 @@ modules:
   - type: rpm-ostree
     install:
       # --- Core & Shell ---
-      - git
-      - wget
-      - aria2
-      - tmux
-      - zsh
-      - zsh-autosuggestions
-      - zsh-syntax-highlighting
-      - vim-enhanced
-      - htop
-      - distrobox
-      - fastfetch
-      - jq
-      - parallel
+      - git # Version control
+      - wget # File downloader
+      - aria2 # Lightweight download utility
+      - tmux # Terminal multiplexer
+      - zsh # Z Shell
+      - zsh-autosuggestions # Zsh history suggestions
+      - zsh-syntax-highlighting # Zsh syntax highlighting
+      - vim-enhanced # Advanced Vim editor
+      - htop # Process viewer
+      - distrobox # Container management
+      - fastfetch # System info tool
+      - jq # JSON processor
+      - parallel # Parallel job executor
       
       # --- Hyprland Ecosystem ---
-      - hyprland
-      - hyprpaper
-      - hyprlock
-      - hypridle
-      - hyprland-qtutils
-      - waybar
-      - rofi-wayland
-      - swaync
-      - wlogout
-      - grim
-      - slurp
-      - wl-clipboard
-      - swappy
-      - cliphist
-      - nwg-displays
-      - nwg-look
-      - lxpolkit
-      - network-manager-applet
-      - blueman
+      - hyprland # Wayland compositor
+      - hyprpaper # Wallpaper utility
+      - hyprlock # Screen locker
+      - hypridle # Idle daemon
+      - hyprland-qtutils # Qt/Hyprland integration
+      - waybar # Status bar
+      - rofi-wayland # App launcher
+      - swaync # Notification daemon
+      - wlogout # Logout menu
+      - grim # Screenshot tool
+      - slurp # Screen region selector
+      - wl-clipboard # Clipboard utilities
+      - swappy # Screenshot annotation
+      - cliphist # Clipboard history
+      - nwg-displays # Monitor configuration
+      - nwg-look # GTK theme customization
+      - lxpolkit # PolicyKit authentication agent
+      - network-manager-applet # Network tray icon
+      - blueman # Bluetooth manager
       
       # --- Theming/Qt ---
-      - sddm
-      - adwaita-gtk2-theme
-      - adwaita-icon-theme
-      - adw-gtk3-theme
-      - qt5-qtstyleplugins
-      - gnome-themes-extra
-      - bibata-cursor-themes
-      - abattis-cantarell-fonts
-      - qt5-qtgraphicaleffects
-      - qt5-qtquickcontrols2
-      - qt5-qtsvg
-      - qt5ct
-      - qt6ct
-      - kvantum
+      - sddm # Login manager
+      - adwaita-gtk2-theme # GTK2 theme
+      - adwaita-icon-theme # Standard icon theme
+      - adw-gtk3-theme # Libadwaita theme for GTK3
+      - qt5-qtstyleplugins # Qt style plugins
+      - gnome-themes-extra # Extra GNOME themes
+      - bibata-cursor-themes # Modern cursor theme
+      - abattis-cantarell-fonts # GNOME default font
+      - qt5-qtgraphicaleffects # Qt graphical effects
+      - qt5-qtquickcontrols2 # Qt Quick Controls 2
+      - qt5-qtsvg # Qt SVG support
+      - qt5ct # Qt5 configuration tool
+      - qt6ct # Qt6 configuration tool
+      - kvantum # Qt SVG theme engine
       
       # --- Networking ---
-      - tailscale
+      - tailscale # Mesh VPN
 
       # --- GUI Applications ---
-      - xarchiver
-      - gnome-text-editor
-      - gnome-calculator
-      - mpv
-      - eog            
-      - pavucontrol
-      - brightnessctl
-      - playerctl
-      - pamixer
-      - yad
+      - xarchiver # Archive manager
+      - gnome-text-editor # Simple text editor
+      - gnome-calculator # Calculator
+      - mpv # Media player
+      - eog # Image viewer (Eye of GNOME)
+      - pavucontrol # PulseAudio volume control
+      - brightnessctl # Brightness control CLI
+      - playerctl # Media player control CLI
+      - pamixer # PulseAudio mixer CLI
+      - yad # GUI dialog tool for scripts
 
       # --- Missing Dependencies (Added for base-main) ---
-      - nautilus
-      - gvfs
-      - gvfs-mtp # Android phone file transfer
-      - gvfs-smb # Network file sharing (SMB/CIFS)
-      - gnome-keyring
-      - kitty
-      - polkit
-      - xdg-user-dirs # Standardizes /home folders (Downloads, Pictures, etc.)
+      - nautilus # File manager
+      - gvfs # Virtual filesystem
+      - gvfs-mtp # Android MTP support
+      - gvfs-smb # SMB/CIFS support
+      - gnome-keyring # Password manager
+      - kitty # Terminal emulator
+      - polkit # Privilege management
+      - xdg-user-dirs # User directory manager
 
       # --- Portals (Critical for Hyprland/Flatpaks) ---
-      - xdg-desktop-portal-hyprland # Screen sharing, recording, Wayland features
-      - xdg-desktop-portal-gtk # Fallback file picker and theme integration
+      - xdg-desktop-portal-hyprland # Hyprland portal
+      - xdg-desktop-portal-gtk # GTK portal fallback
 
       # --- Archives & Thumbnails ---
-      - unzip
-      - zip
-      - p7zip
-      - p7zip-plugins # Handles .rar extraction (replacing unrar)
-      - tar
-      - xz
-      - bzip2
-      - gzip
-      - ffmpegthumbnailer # Video thumbnails in Nautilus
+      - unzip # Zip extractor
+      - zip # Zip archiver
+      - p7zip # 7z archiver
+      - p7zip-plugins # Rar support
+      - tar # Tarball utility
+      - xz # XZ compression
+      - bzip2 # Bzip2 compression
+      - gzip # Gzip compression
+      - ffmpegthumbnailer # Video thumbnailer
 
       # --- Codecs & Multimedia ---
-      - gstreamer1-plugins-ugly-free
-      - gstreamer1-plugins-bad-free-extras
+      - gstreamer1-plugins-ugly-free # Multimedia codecs
+      - gstreamer1-plugins-bad-free-extras # Extra multimedia codecs
       - gstreamer1-vaapi # Hardware acceleration
       # Note: Full ffmpeg requires RPM Fusion, not added here to keep it pure Fedora for now
 
       # --- Fonts (Base & Emojis) ---
-      - google-noto-emoji-fonts # Fixes broken emojis in apps
-      - rsms-inter-fonts # Modern UI font
+      - google-noto-emoji-fonts # Emoji fonts
+      - rsms-inter-fonts # Inter UI font
       
       # Sound
-      - pipewire
-      - wireplumber
-      - pipewire-alsa
-      - pipewire-pulseaudio
-      - pipewire-utils # CLI tools (pw-top, etc.)
+      - pipewire # Audio/Video server
+      - wireplumber # PipeWire session manager
+      - pipewire-alsa # ALSA compatibility
+      - pipewire-pulseaudio # PulseAudio compatibility
+      - pipewire-utils # PipeWire CLI tools
 
       # Network/Bluetooth
-      - NetworkManager
-      - NetworkManager-tui
-      - NetworkManager-wifi
-      - bluez
-      - bluez-cups
+      - NetworkManager # Network connection manager
+      - NetworkManager-tui # NMTUI text interface
+      - NetworkManager-wifi # WiFi support
+      - bluez # Bluetooth stack
+      - bluez-cups # Bluetooth printing
 
       # --- HDD / SSD tool
-      - smartmontools
+      - smartmontools # Disk health monitoring
 
   # 2. Copy Config Files
   - type: files
