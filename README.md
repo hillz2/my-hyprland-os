@@ -38,6 +38,7 @@ It is designed to be a "batteries-included" starting point for a Hyprland setup 
 * **Audio Control:** Pavucontrol
 * **Text Editor:** Gnome Text Editor
 * **System Management:** Htop, Distrobox, Flatseal
+* **Screen Recorder:** Wf-recorder, slurp (allows you to select a specific region of the screen to record)
 
 ### Custom Binaries
 * **Wallust:** Included directly in `/usr/bin/wallust` for generating color schemes from wallpapers.
