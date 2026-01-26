@@ -155,26 +155,10 @@ For a full list of keybindings, check `~/.config/hypr/UserConfigs/UserKeybinds.c
 
 ## 🔄 Updating
 
-The system is configured to automatically check for updates **monthly** to reduce large daily downloads (since the base image updates daily).
+The automatic updater for `rpm-ostree` and `bootc` have been disabled.
 
-To manually update your system immediately:
-
-```bash
-rpm-ostree upgrade
-```
-
-### Changing Update Frequency
-The automatic update frequency is controlled by a systemd timer override located at `/etc/systemd/system/rpm-ostreed-automatic.timer.d/override.conf`.
-
-To revert to the default **daily** updates (if you want the bleeding edge):
+To manually update your system:
 
 ```bash
-sudo rm /etc/systemd/system/rpm-ostreed-automatic.timer.d/override.conf
-sudo systemctl daemon-reload
-```
-
-You can check when the next update is scheduled to run by executing:
-
-```bash
-systemctl list-timers rpm-ostreed-automatic.timer
+sudo bootc upgrade
 ```
