@@ -65,8 +65,8 @@ modules:
       - abattis-cantarell-fonts # GNOME default font
       - qt5-qtgraphicaleffects # Qt graphical effects
       - qt5-qtquickcontrols2 # Qt Quick Controls 2
-      - qt5-wayland # Necessary for Qt5 apps to run natively on Wayland (fixes blurry apps)
-      - qt6-wayland # Necessary for Qt6 apps to run natively on Wayland
+      - qt5-qtwayland # Necessary for Qt5 apps to run natively on Wayland (fixes blurry apps)
+      - qt6-qtwayland # Necessary for Qt6 apps to run natively on Wayland
       - qt5-qtsvg # Qt SVG support
       - qt5ct # Qt5 configuration tool
       - qt6ct # Qt6 configuration tool
