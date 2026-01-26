@@ -141,7 +141,6 @@ modules:
 
       # CLI screen recorder
       - wf-recorder # A utility program for screen recording
-      - slurp # slurp allows you to select a specific region of the screen to record
 
   # 3. Copy Config Files
   - type: files
