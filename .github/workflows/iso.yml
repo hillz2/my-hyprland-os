@@ -34,7 +34,7 @@ jobs:
           iso_name: galih-os_${{ steps.date.outputs.date }}.iso
 
       - name: Upload ISO Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: galih-os-iso-${{ steps.date.outputs.date }}
           path: |
