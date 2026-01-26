@@ -6,7 +6,6 @@ image-version: latest
 modules:
   # 1. Enable RPM Fusion (Manual Workaround)
   - type: script
-    name: install-rpm-fusion
     snippets:
       # Install the free and non-free release RPMs directly
       - rpm-ostree install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
