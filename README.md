@@ -77,6 +77,24 @@ After rebooting, if you run `rpm-ostree status`, you will see:
 
 ---
 
+## 🐳 Using bootc (Experimental)
+
+This image now includes `bootc`. If you are already running a system with `bootc` (or after you rebase to this image), you can manage your system using `bootc` instead of `rpm-ostree`.
+
+To switch to this image using `bootc`:
+
+```bash
+sudo bootc switch ghcr.io/hillz2/my-hyprland-os:latest
+```
+
+To update your system using `bootc`:
+
+```bash
+sudo bootc upgrade
+```
+
+---
+
 ## ⚙️ Configuration Setup (Post-Install)
 
 This image places default configuration files (dotfiles) into `/etc/skel/.config/`.

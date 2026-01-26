@@ -22,6 +22,7 @@ modules:
       - git # Version control
       - wget # File downloader
       - aria2 # Lightweight download utility
+      - bootc # Bootable container manager
       - tmux # Terminal multiplexer
       - zsh # Z Shell
       - zsh-autosuggestions # Zsh history suggestions
