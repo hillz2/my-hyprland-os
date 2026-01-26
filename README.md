@@ -93,6 +93,12 @@ To update your system using `bootc`:
 sudo bootc upgrade
 ```
 
+To check the current status of your images using `bootc`:
+
+```bash
+sudo bootc status
+```
+
 ---
 
 ## ⚙️ Configuration Setup (Post-Install)
