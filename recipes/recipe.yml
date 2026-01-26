@@ -4,12 +4,20 @@ base-image: ghcr.io/ublue-os/base-main
 image-version: latest
 
 modules:
-  # 0. Enable COPR for Hyprland extras
+  # 1. Enable RPM Fusion (Insert this FIRST)
+  # This provides access to non-free codecs and full ffmpeg
+  - type: rpm-fusion
+    cisco-h264:
+      enabled: true
+    nonfree:
+      enabled: true
+
+  # 2. Enable COPR for Hyprland extras
   - type: script
     scripts:
       - enable_copr.sh
 
-  # 1. Install RPM Packages
+  # 3. Install RPM Packages
   - type: rpm-ostree
     install:
       # --- Core & Shell ---
@@ -59,6 +67,8 @@ modules:
       - abattis-cantarell-fonts # GNOME default font
       - qt5-qtgraphicaleffects # Qt graphical effects
       - qt5-qtquickcontrols2 # Qt Quick Controls 2
+      - qt5-wayland # Necessary for Qt5 apps to run natively on Wayland (fixes blurry apps)
+      - qt6-wayland # Necessary for Qt6 apps to run natively on Wayland
       - qt5-qtsvg # Qt SVG support
       - qt5ct # Qt5 configuration tool
       - qt6ct # Qt6 configuration tool
@@ -107,12 +117,15 @@ modules:
       # --- Codecs & Multimedia ---
       - gstreamer1-plugins-ugly-free # Multimedia codecs
       - gstreamer1-plugins-bad-free-extras # Extra multimedia codecs
-      - gstreamer1-vaapi # Hardware acceleration
-      # Note: Full ffmpeg requires RPM Fusion, not added here to keep it pure Fedora for now
-
+      - ffmpeg # The full ffmpeg package from RPM Fusion
+      - gstreamer1-plugin-openh264 # Enables H.264 video playback support via Cisco's binary (fallback/legal)
+      - gstreamer1-vaapi # Enables Hardware Acceleration for GStreamer applications to reduce CPU usage
+      - intel-media-driver # Install intel VAAPI drivers to reduce CPU usage
+      
       # --- Fonts (Base & Emojis) ---
       - google-noto-emoji-fonts # Emoji fonts
       - rsms-inter-fonts # Inter UI font
+      - google-noto-sans-cjk-fonts # Essential for Japanese/Chinese characters
       
       # Sound
       - pipewire # Audio/Video server
@@ -131,13 +144,17 @@ modules:
       # --- HDD / SSD tool
       - smartmontools # Disk health monitoring
 
-  # 2. Copy Config Files
+      # CLI screen recorder
+      - wf-recorder # A utility program for screen recording
+      - slurp # slurp allows you to select a specific region of the screen to record
+
+  # 3. Copy Config Files
   - type: files
     files:
       - source: system
         destination: /
 
-  # 3. Flatpak Configuration
+  # 4. Flatpak Configuration
   - type: default-flatpaks
     configurations:
       - container: system
@@ -146,13 +163,13 @@ modules:
           - com.github.tchx84.Flatseal
           - net.waterfox.waterfox
 
-  # 4. Fonts
+  # 5. Fonts
   - type: fonts
     fonts:
       nerd-fonts:
         - JetBrainsMono
 
-  # 5. Systemd Services
+  # 6. Systemd Services
   - type: systemd
     system:
       enabled:
@@ -162,7 +179,7 @@ modules:
         - bluetooth
         - rpm-ostreed-automatic.timer
 
-  # 6. Customize OS Name
+  # 7. Customize OS Name
   - type: os-release
     properties:
       NAME: "GalihOS"
