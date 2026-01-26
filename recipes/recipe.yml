@@ -77,8 +77,6 @@ modules:
 
       # --- GUI Applications ---
       - xarchiver # Archive manager
-      - gnome-text-editor # Simple text editor
-      - gnome-calculator # Calculator
       - mpv # Media player
       - eog # Image viewer (Eye of GNOME)
       - pavucontrol # PulseAudio volume control
@@ -158,7 +156,9 @@ modules:
         notify: true
         install:
           - com.github.tchx84.Flatseal
-          - net.waterfox.waterfox
+          - net.waterfox.waterfox # Waterfox web browser
+          - com.visualstudio.code # Code editor
+          - org.gnome.Calculator # Calculator
 
   # 5. Fonts
   - type: fonts
