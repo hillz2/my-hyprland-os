@@ -118,7 +118,6 @@ modules:
       - ffmpeg # The full ffmpeg package from RPM Fusion
       - gstreamer1-plugin-openh264 # Enables H.264 video playback support via Cisco's binary (fallback/legal)
       - gstreamer1-vaapi # Enables Hardware Acceleration for GStreamer applications to reduce CPU usage
-      - intel-media-driver # Install intel VAAPI drivers to reduce CPU usage
       
       # --- Fonts (Base & Emojis) ---
       - google-noto-emoji-fonts # Emoji fonts
