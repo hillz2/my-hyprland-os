@@ -4,13 +4,14 @@ base-image: ghcr.io/ublue-os/base-main
 image-version: latest
 
 modules:
-  # 1. Enable RPM Fusion (Insert this FIRST)
-  # This provides access to non-free codecs and full ffmpeg
-  - type: rpm-fusion
-    cisco-h264:
-      enabled: true
-    nonfree:
-      enabled: true
+  # 1. Enable RPM Fusion (Manual Workaround)
+  - type: script
+    name: install-rpm-fusion
+    snippets:
+      # Install the free and non-free release RPMs directly
+      - rpm-ostree install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+      # Ensure Cisco OpenH264 is enabled
+      - sed -i 's/enabled=0/enabled=1/g' /etc/yum.repos.d/fedora-cisco-openh264.repo
 
   # 2. Enable COPR for Hyprland extras
   - type: script
