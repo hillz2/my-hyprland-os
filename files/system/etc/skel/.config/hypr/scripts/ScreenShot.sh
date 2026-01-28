@@ -81,7 +81,6 @@ countdown() {
 # take shots
 shotnow() {
 	cd ${dir} && grim - | tee "$file" | wl-copy
-	sleep 2
 	notify_view
 }
 
@@ -123,7 +122,6 @@ shotactive() {
     active_window_path="${dir}/${active_window_file}"
 
     hyprctl -j activewindow | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"' | grim -g - "${active_window_path}"
-	sleep 1
     notify_view "active"
 }
 
