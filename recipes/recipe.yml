@@ -33,7 +33,7 @@ modules:
       - fastfetch # System info tool
       - jq # JSON processor
       - parallel # Parallel job executor
-      - tldr # Shows cheatsheet for terminal commands
+      - tealdeer # Shows cheatsheet for terminal commands
       
       # --- Hyprland Ecosystem ---
       - hyprland # Wayland compositor
