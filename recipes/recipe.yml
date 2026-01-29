@@ -183,7 +183,7 @@ modules:
       PRETTY_NAME: "GalihOS (ublue-os with hyprland) x86_64"
       ID: "galihos"
       ID_LIKE: fedora
-      VERSION_ID: "2.0"
+      VERSION_ID: "43"
       VARIANT: "Hyprland Edition"
       VARIANT_ID: "hyprland"
       DEFAULT_HOSTNAME: "GalihOS"
