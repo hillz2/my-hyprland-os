@@ -168,3 +168,4 @@ To manually update your system:
 ```bash
 sudo bootc upgrade
 ```
+.
