@@ -1,7 +1,7 @@
 name: my-hyprland-os
 description: Custom ublue-os base with Hyprland
 base-image: ghcr.io/ublue-os/base-main
-image-version: latest
+image-version: 43 # switch to "latest" later
 
 modules:
   # 1. Enable RPM Fusion (Manual Workaround)
@@ -52,7 +52,7 @@ modules:
       - cliphist # Clipboard history
       - nwg-displays # Monitor configuration
       - nwg-look # GTK theme customization
-      - lxpolkit # PolicyKit authentication agent
+      - polkit-gnome # PolicyKit authentication agent
       - network-manager-applet # Network tray icon
       - blueman # Bluetooth manager
       
@@ -117,7 +117,6 @@ modules:
       - gstreamer1-plugins-bad-free-extras # Extra multimedia codecs
       - ffmpeg # The full ffmpeg package from RPM Fusion
       - gstreamer1-plugin-openh264 # Enables H.264 video playback support via Cisco's binary (fallback/legal)
-      - gstreamer1-vaapi # Enables Hardware Acceleration for GStreamer applications to reduce CPU usage
       
       # --- Fonts (Base & Emojis) ---
       - google-noto-emoji-fonts # Emoji fonts
