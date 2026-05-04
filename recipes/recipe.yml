@@ -58,11 +58,9 @@ modules:
       
       # --- Theming/Qt ---
       - sddm # Login manager
-      - adwaita-gtk2-theme # GTK2 theme
       - adwaita-icon-theme # Standard icon theme
       - adw-gtk3-theme # Libadwaita theme for GTK3
       - qt5-qtstyleplugins # Qt style plugins
-      - gnome-themes-extra # Extra GNOME themes
       - bibata-cursor-themes # Modern cursor theme
       - abattis-cantarell-fonts # GNOME default font
       - qt5-qtgraphicaleffects # Qt graphical effects
