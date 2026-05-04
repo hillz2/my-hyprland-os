@@ -1,7 +1,7 @@
 name: my-hyprland-os
 description: Custom ublue-os base with Hyprland
 base-image: ghcr.io/ublue-os/base-main
-image-version: 43 # switch to "latest" later
+image-version: latest
 
 modules:
   # 1. Enable RPM Fusion (Manual Workaround)
@@ -181,7 +181,7 @@ modules:
       PRETTY_NAME: "GalihOS (ublue-os with hyprland) x86_64"
       ID: "galihos"
       ID_LIKE: fedora
-      VERSION_ID: "43"
+      VERSION_ID: "44"
       VARIANT: "Hyprland Edition"
       VARIANT_ID: "hyprland"
       DEFAULT_HOSTNAME: "GalihOS"
