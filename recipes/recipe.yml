@@ -52,7 +52,7 @@ modules:
       - cliphist # Clipboard history
       - nwg-displays # Monitor configuration
       - nwg-look # GTK theme customization
-      - polkit-gnome # PolicyKit authentication agent
+      - hyprpolkitagent # Native Hyprland PolicyKit agent
       - network-manager-applet # Network tray icon
       - blueman # Bluetooth manager
       
