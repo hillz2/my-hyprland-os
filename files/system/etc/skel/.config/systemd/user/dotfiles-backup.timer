@@ -1,0 +1,13 @@
+[Unit]
+Description=Run dotfiles backup daily
+
+[Timer]
+# Run 15 minutes after boot (to ensure network is up)
+OnBootSec=15min
+# Run daily (or use 'hourly' if you prefer)
+OnCalendar=daily
+# If the computer was off during the scheduled time, run it immediately on boot
+Persistent=true
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,14 @@
+[Unit]
+Description=Auto Backup Dotfiles
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/Dotfiles/auto_backup.sh
+# If you are running Hyprland, systemd user environment needs to know about DBUS/DISPLAY for notifications:
+Environment=DISPLAY=:0
+Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+
+[Install]
+WantedBy=default.target
