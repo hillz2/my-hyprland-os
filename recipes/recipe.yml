@@ -1,21 +1,10 @@
 name: my-hyprland-os
 description: Custom ublue-os base with Hyprland
 base-image: ghcr.io/ublue-os/base-main
-image-version: latest
+image-version: 44
 
 modules:
-  # 1. Enable RPM Fusion (Manual Workaround)
-  - type: script
-    snippets:
-      # Install the free and non-free release RPMs directly
-      - rpm-ostree -v install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-
-  # 2. Enable COPR for Hyprland extras
-#  - type: script
-#    scripts:
-#      - enable_copr.sh
-
-  # 3. Install RPM Packages
+  # 1. Install RPM Packages (Native Fedora 44 repos + Pre-baked RPM Fusion)
   - type: rpm-ostree
     install:
       # --- Core & Shell ---
@@ -65,8 +54,8 @@ modules:
       - abattis-cantarell-fonts # GNOME default font
       - qt5-qtgraphicaleffects # Qt graphical effects
       - qt5-qtquickcontrols2 # Qt Quick Controls 2
-      - qt5-qtwayland # Necessary for Qt5 apps to run natively on Wayland (fixes blurry apps)
-      - qt6-qtwayland # Necessary for Qt6 apps to run natively on Wayland
+      - qt5-qtwayland # Fixes blurry Wayland apps
+      - qt6-qtwayland # Native Wayland for Qt6
       - qt5-qtsvg # Qt SVG support
       - qt5ct # Qt5 configuration tool
       - qt6ct # Qt6 configuration tool
@@ -74,14 +63,15 @@ modules:
       
       # --- Networking ---
       - tailscale # Mesh VPN
+      - iperf3 # Speed test for your local network
 
       # --- GUI Applications ---
       - xarchiver # Archive manager
       - mpv # Media player
-      - eog # Image viewer (Eye of GNOME)
+      - eog # Image viewer
       - pavucontrol # PulseAudio volume control
-      - brightnessctl # Brightness control CLI
-      - playerctl # Media player control CLI
+      - brightnessctl # Brightness CLI
+      - playerctl # Media player CLI
       - pamixer # PulseAudio mixer CLI
       - yad # GUI dialog tool for scripts
       - gnome-text-editor # Text editor
@@ -98,74 +88,72 @@ modules:
 
       # --- Portals (Critical for Hyprland/Flatpaks) ---
       - xdg-desktop-portal-hyprland # Hyprland portal
-      - xdg-desktop-portal-gtk # GTK portal fallback
+      - xdg-desktop-portal-gtk # GTK fallback portal
 
       # --- Archives & Thumbnails ---
-      - unzip # Zip extractor
-      - unrar # Rar extractor
-      - zip # Zip archiver
-      - p7zip # 7z archiver
-      - p7zip-plugins # Rar support
-      - tar # Tarball utility
-      - xz # XZ compression
-      - bzip2 # Bzip2 compression
-      - gzip # Gzip compression
-      - ffmpegthumbnailer # Video thumbnailer
+      - unzip
+      - unrar
+      - zip
+      - p7zip
+      - p7zip-plugins
+      - tar
+      - xz
+      - bzip2
+      - gzip
+      - ffmpegthumbnailer
 
       # --- Codecs & Multimedia ---
-      - gstreamer1-plugins-ugly-free # Multimedia codecs
-      - gstreamer1-plugins-bad-free-extras # Extra multimedia codecs
-      - ffmpeg # The full ffmpeg package from RPM Fusion
-      - gstreamer1-plugin-openh264 # Enables H.264 video playback support via Cisco's binary (fallback/legal)
+      - gstreamer1-plugins-ugly-free
+      - gstreamer1-plugins-bad-free-extras
+      - ffmpeg # Pulled automatically from pre-baked RPM Fusion
+      - gstreamer1-plugin-openh264
       
-      # --- Fonts (Base & Emojis) ---
-      - google-noto-emoji-fonts # Emoji fonts
-      - rsms-inter-fonts # Inter UI font
-      - google-noto-sans-cjk-fonts # Essential for Japanese/Chinese characters
+      # --- Fonts ---
+      - google-noto-emoji-fonts
+      - rsms-inter-fonts
+      - google-noto-sans-cjk-fonts
       
-      # Sound
-      - pipewire # Audio/Video server
-      - wireplumber # PipeWire session manager
-      - pipewire-alsa # ALSA compatibility
-      - pipewire-pulseaudio # PulseAudio compatibility
-      - pipewire-utils # PipeWire CLI tools
+      # --- Sound ---
+      - pipewire
+      - wireplumber
+      - pipewire-alsa
+      - pipewire-pulseaudio
+      - pipewire-utils
 
-      # Network/Bluetooth
-      - NetworkManager # Network connection manager
-      - NetworkManager-tui # NMTUI text interface
-      - NetworkManager-wifi # WiFi support
-      - bluez # Bluetooth stack
-      - bluez-cups # Bluetooth printing
+      # --- Network / Bluetooth ---
+      - NetworkManager
+      - NetworkManager-tui
+      - NetworkManager-wifi
+      - bluez
+      - bluez-cups
 
-      # --- HDD / SSD tool
-      - smartmontools # Disk health monitoring
+      # --- System Utilities ---
+      - smartmontools
+      - wf-recorder
 
-      # CLI screen recorder
-      - wf-recorder # A utility program for screen recording
-
-  # 3. Copy Config Files
+  # 2. Copy Config Files
   - type: files
     files:
       - source: system
         destination: /
 
-  # 4. Flatpak Configuration
+  # 3. Flatpak Configuration
   - type: default-flatpaks
     configurations:
       - container: system
         notify: true
         install:
           - com.github.tchx84.Flatseal
-          - net.waterfox.waterfox # Waterfox web browser
-          - org.gnome.Calculator # Calculator
+          - net.waterfox.waterfox
+          - org.gnome.Calculator
 
-  # 5. Fonts
+  # 4. Fonts
   - type: fonts
     fonts:
       nerd-fonts:
         - JetBrainsMono
 
-  # 6. Systemd Services
+  # 5. Systemd Services
   - type: systemd
     system:
       enabled:
@@ -174,7 +162,7 @@ modules:
         - NetworkManager
         - bluetooth
 
-  # 7. Customize OS Name
+  # 6. Customize OS Name
   - type: os-release
     properties:
       NAME: "GalihOS"
@@ -186,4 +174,5 @@ modules:
       VARIANT_ID: "hyprland"
       DEFAULT_HOSTNAME: "GalihOS"
 
+  # 7. Sign image
   - type: signing
