@@ -39,7 +39,7 @@ modules:
       - hyprpaper # Wallpaper utility
       - hyprlock # Screen locker
       - hypridle # Idle daemon
-      - hyprland-qtutils # Qt/Hyprland integration
+      #- hyprland-qtutils # Qt/Hyprland integration
       - waybar # Status bar
       - rofi-wayland # App launcher
       - swaync # Notification daemon
