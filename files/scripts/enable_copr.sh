@@ -7,4 +7,3 @@ dnf install -y dnf-plugins-core
 dnf copr enable -y lionheartp/Hyprland
 dnf copr enable -y tofik/nwg-shell
 dnf copr enable -y peterwu/rendezvous
-dnf copr enable -y materka/wallust

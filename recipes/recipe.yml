@@ -35,7 +35,6 @@ modules:
       - tealdeer # Shows cheatsheet for terminal commands
       - libnotify # Provides notify-send CLI
       - dbus-tools # Provides dbus-send for bootstrap poller
-      - wallust # Dynamic color palette generator
       
       # --- Hyprland Ecosystem ---
       - hyprland # Wayland compositor
