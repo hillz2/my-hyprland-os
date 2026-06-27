@@ -1,0 +1,13 @@
+[Unit]
+Description=Bootstrap Galih Dotfiles on first login
+After=graphical-session.target
+PartOf=graphical-session.target
+ConditionPathExists=!%h/.dotfiles_bootstrapped
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/bootstrap-dotfiles
+RemainAfterExit=yes
+
+[Install]
+WantedBy=graphical-session.target

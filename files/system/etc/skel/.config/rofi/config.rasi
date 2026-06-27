@@ -1,9 +1,0 @@
-configuration {
-    modi: "drun,run,window";
-    show-icons: true;
-    display-drun: "Apps";
-    drun-display-format: "{name}";
-}
-
-// @theme "themes/catppuccin-mocha"
-@theme "themes/catppuccin-wallust"

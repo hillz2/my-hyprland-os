@@ -33,6 +33,9 @@ modules:
       - jq # JSON processor
       - parallel # Parallel job executor
       - tealdeer # Shows cheatsheet for terminal commands
+      - libnotify # Provides notify-send CLI
+      - dbus-tools # Provides dbus-send for bootstrap poller
+      - wallust # Dynamic color palette generator
       
       # --- Hyprland Ecosystem ---
       - hyprland # Wayland compositor
@@ -141,13 +144,13 @@ modules:
       - smartmontools
       - wf-recorder
 
-  # 2. Copy Config Files
+  # 4. Copy Config Files
   - type: files
     files:
       - source: system
         destination: /
 
-  # 3. Flatpak Configuration
+  # 5. Flatpak Configuration
   - type: default-flatpaks
     configurations:
       - container: system
@@ -157,13 +160,13 @@ modules:
           - net.waterfox.waterfox
           - org.gnome.Calculator
 
-  # 4. Fonts
+  # 6. Fonts
   - type: fonts
     fonts:
       nerd-fonts:
         - JetBrainsMono
 
-  # 5. Systemd Services
+  # 7. Systemd Services
   - type: systemd
     system:
       enabled:
@@ -172,7 +175,7 @@ modules:
         - NetworkManager
         - bluetooth
 
-  # 6. Customize OS Name
+  # 8. Customize OS Name
   - type: os-release
     properties:
       NAME: "GalihOS"
@@ -184,5 +187,5 @@ modules:
       VARIANT_ID: "hyprland"
       DEFAULT_HOSTNAME: "GalihOS"
 
-  # 7. Sign image
+  # 9. Sign image
   - type: signing
