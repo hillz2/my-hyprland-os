@@ -8,6 +8,7 @@ modules:
   - type: script
     scripts:
       - enable_copr.sh
+      - install_wallust.sh
 
   # 2. THE REAL TURN 1 FIX: Pre-fetch the newer display library from testing
   - type: script
@@ -153,7 +154,7 @@ modules:
   - type: default-flatpaks
     configurations:
       - container: system
-        notify: true
+        notify: false
         install:
           - com.github.tchx84.Flatseal
           - net.waterfox.waterfox
