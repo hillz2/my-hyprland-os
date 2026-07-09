@@ -59,7 +59,8 @@ modules:
       - blueman # Bluetooth manager
       
       # --- Theming/Qt ---
-      - sddm # Login manager
+      - greetd
+      - tuigreet
       - adwaita-icon-theme # Standard icon theme
       - adw-gtk3-theme # Libadwaita theme for GTK3
       - qt5-qtstyleplugins # Qt style plugins
@@ -170,10 +171,12 @@ modules:
   - type: systemd
     system:
       enabled:
-        - tailscaled
-        - sddm
+        - greetd
         - NetworkManager
         - bluetooth
+      disabled:
+        # Disable tailscale by default unless you are actively using it, to run "sudo systemctl start tailscaled"
+        - tailscaled
 
   # 8. Customize OS Name
   - type: os-release
