@@ -59,8 +59,7 @@ modules:
       - blueman # Bluetooth manager
       
       # --- Theming/Qt ---
-      - greetd
-      - tuigreet
+      - sddm
       - adwaita-icon-theme # Standard icon theme
       - adw-gtk3-theme # Libadwaita theme for GTK3
       - qt5-qtstyleplugins # Qt style plugins
@@ -171,7 +170,7 @@ modules:
   - type: systemd
     system:
       enabled:
-        - greetd
+        - sddm
         - NetworkManager
         - bluetooth
       disabled:
