@@ -143,6 +143,7 @@ modules:
       # --- System Utilities ---
       - smartmontools
       - wf-recorder
+      - xkill
 
   # 4. Copy Config Files
   - type: files
