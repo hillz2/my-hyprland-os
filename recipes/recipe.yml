@@ -144,6 +144,9 @@ modules:
       - smartmontools
       - wf-recorder
 
+      # Android tools
+      - android-tools
+
   # 4. Copy Config Files
   - type: files
     files:
