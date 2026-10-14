@@ -160,7 +160,7 @@ modules:
         notify: false
         install:
           - com.github.tchx84.Flatseal
-          - net.waterfox.waterfox
+          - org.mozilla.firefox
           - org.gnome.Calculator
 
   # 6. Fonts
