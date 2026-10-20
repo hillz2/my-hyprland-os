@@ -1,5 +1,5 @@
 name: my-hyprland-os
-description: Custom ublue-os base with Hyprland
+description: Lightweight Custom ublue-os base with Hyprland
 base-image: ghcr.io/ublue-os/base-main
 image-version: 44
 
@@ -10,98 +10,91 @@ modules:
       - enable_copr.sh
       - install_wallust.sh
 
-  # 2. THE REAL TURN 1 FIX: Pre-fetch the newer display library from testing
+  # 2. Pre-fetch newer display library from testing
   - type: script
     snippets:
       - rpm-ostree install --enablerepo=updates-testing libdisplay-info
 
-  # 3. Install RPM Packages (Native Fedora 44 repos + Pre-baked RPM Fusion)
+  # 3. Install RPM Packages (Trimmed & Optimized)
   - type: rpm-ostree
     install:
       # --- Core & Shell ---
-      - git # Version control
-      - wget # File downloader
-      - aria2 # Lightweight download utility
-      - bootc # Bootable container manager
-      - tmux # Terminal multiplexer
-      - zsh # Z Shell
-      - zsh-autosuggestions # Zsh history suggestions
-      - zsh-syntax-highlighting # Zsh syntax highlighting
-      - vim-enhanced # Advanced Vim editor
-      - htop # Process viewer
-      - distrobox # Container management
-      - fastfetch # System info tool
-      - jq # JSON processor
-      - parallel # Parallel job executor
-      - tealdeer # Shows cheatsheet for terminal commands
-      - libnotify # Provides notify-send CLI
-      - dbus-tools # Provides dbus-send for bootstrap poller
+      - git
+      - wget
+      - aria2
+      - bootc
+      - tmux
+      - zsh
+      - zsh-autosuggestions
+      - zsh-syntax-highlighting
+      - vim-enhanced
+      - htop
+      - distrobox
+      - fastfetch
+      - jq
+      - parallel
+      - tealdeer
+      - libnotify
+      - dbus-tools
       
       # --- Hyprland Ecosystem ---
-      - hyprland # Wayland compositor
-      - hyprpaper # Wallpaper utility
-      - hyprlock # Screen locker
-      - hypridle # Idle daemon
-      - hyprland-guiutils # Hyprland dialog box
-      - waybar # Status bar
-      - rofi-wayland # App launcher
-      - swaync # Notification daemon
-      - wlogout # Logout menu
-      - grim # Screenshot tool
-      - slurp # Screen region selector
-      - wl-clipboard # Clipboard utilities
-      - swappy # Screenshot annotation
-      - cliphist # Clipboard history
-      - nwg-displays # Monitor configuration
-      - nwg-look # GTK theme customization
-      - hyprpolkitagent # Native Hyprland PolicyKit agent
-      - network-manager-applet # Network tray icon
-      - blueman # Bluetooth manager
+      - hyprland
+      - hyprpaper
+      - hyprlock
+      - hypridle
+      - hyprland-guiutils
+      - waybar
+      - rofi-wayland
+      - swaync
+      - wlogout
+      - grim
+      - slurp
+      - wl-clipboard
+      - swappy
+      - cliphist
+      - nwg-displays
+      - nwg-look
+      - hyprpolkitagent
+      - network-manager-applet
+      - blueman
       
-      # --- Theming/Qt ---
-      - sddm
-      - adwaita-icon-theme # Standard icon theme
-      - adw-gtk3-theme # Libadwaita theme for GTK3
-      - qt5-qtstyleplugins # Qt style plugins
-      - bibata-cursor-themes # Modern cursor theme
-      - abattis-cantarell-fonts # GNOME default font
-      - qt5-qtgraphicaleffects # Qt graphical effects
-      - qt5-qtquickcontrols2 # Qt Quick Controls 2
-      - qt5-qtwayland # Fixes blurry Wayland apps
-      - qt6-qtwayland # Native Wayland for Qt6
-      - qt5-qtsvg # Qt SVG support
-      - qt5ct # Qt5 configuration tool
-      - qt6ct # Qt6 configuration tool
-      - kvantum # Qt SVG theme engine
+      # --- Theming (Pure Wayland / GTK-focused) ---
+      - adwaita-icon-theme
+      - adw-gtk3-theme
+      - bibata-cursor-themes
+      - abattis-cantarell-fonts
+      - qt5-qtwayland # Minimal Wayland support for Qt apps
+      - qt6-qtwayland
+      - qt6ct
       
       # --- Networking ---
-      - tailscale # Mesh VPN
-      - iperf3 # Speed test for your local network
+      - tailscale
+      - iperf3
 
       # --- GUI Applications ---
-      - xarchiver # Archive manager
-      - mpv # Media player
-      - eog # Image viewer
-      - pavucontrol # PulseAudio volume control
-      - brightnessctl # Brightness CLI
-      - playerctl # Media player CLI
-      - pamixer # PulseAudio mixer CLI
-      - yad # GUI dialog tool for scripts
-      - gnome-text-editor # Text editor
+      - xarchiver
+      - mpv
+      - eog
+      - pavucontrol
+      - brightnessctl
+      - playerctl
+      - pamixer
+      - yad
+      - geany # Lightweight GUI text editor for coding
 
-      # --- Missing Dependencies (Added for base-main) ---
-      - nautilus # File manager
-      - gvfs # Virtual filesystem
-      - gvfs-mtp # Android MTP support
-      - gvfs-smb # SMB/CIFS support
-      - gnome-keyring # Password manager
-      - kitty # Terminal emulator
-      - polkit # Privilege management
-      - xdg-user-dirs # User directory manager
+      # --- Essential Base Dependencies ---
+      - thunar
+      - gvfs
+      - gvfs-mtp
+      - gvfs-smb
+      - gnome-keyring
+      - kitty
+      - polkit
+      - xdg-user-dirs
 
-      # --- Portals (Critical for Hyprland/Flatpaks) ---
-      - xdg-desktop-portal-hyprland # Hyprland portal
-      - xdg-desktop-portal-gtk # GTK fallback portal
+      # --- Portals ---
+      - xdg-desktop-portal-hyprland
+      - xdg-desktop-portal-gtk
 
       # --- Archives & Thumbnails ---
       - unzip
@@ -118,7 +111,7 @@ modules:
       # --- Codecs & Multimedia ---
       - gstreamer1-plugins-ugly-free
       - gstreamer1-plugins-bad-free-extras
-      - ffmpeg # Pulled automatically from pre-baked RPM Fusion
+      - ffmpeg
       - gstreamer1-plugin-openh264
       
       # --- Fonts ---
@@ -140,11 +133,9 @@ modules:
       - bluez
       - bluez-cups
 
-      # --- System Utilities ---
+      # --- System Diagnostics (Kept as requested) ---
       - smartmontools
       - wf-recorder
-
-      # Android tools
       - android-tools
 
   # 4. Copy Config Files
@@ -169,22 +160,20 @@ modules:
       nerd-fonts:
         - JetBrainsMono
 
-  # 7. Systemd Services
+  # 7. Systemd Services (SDDM & Tailscale disabled)
   - type: systemd
     system:
       enabled:
-        - sddm
         - NetworkManager
         - bluetooth
       disabled:
-        # Disable tailscale by default unless you are actively using it, to run "sudo systemctl start tailscaled"
         - tailscaled
 
   # 8. Customize OS Name
   - type: os-release
     properties:
       NAME: "GalihOS"
-      PRETTY_NAME: "GalihOS (ublue-os with hyprland) x86_64"
+      PRETTY_NAME: "GalihOS (Lightweight Hyprland) x86_64"
       ID: "galihos"
       ID_LIKE: fedora
       VERSION_ID: "44"

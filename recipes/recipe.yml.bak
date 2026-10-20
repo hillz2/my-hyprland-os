@@ -1,0 +1,196 @@
+name: my-hyprland-os
+description: Custom ublue-os base with Hyprland
+base-image: ghcr.io/ublue-os/base-main
+image-version: 44
+
+modules:
+  # 1. Enable COPRs
+  - type: script
+    scripts:
+      - enable_copr.sh
+      - install_wallust.sh
+
+  # 2. THE REAL TURN 1 FIX: Pre-fetch the newer display library from testing
+  - type: script
+    snippets:
+      - rpm-ostree install --enablerepo=updates-testing libdisplay-info
+
+  # 3. Install RPM Packages (Native Fedora 44 repos + Pre-baked RPM Fusion)
+  - type: rpm-ostree
+    install:
+      # --- Core & Shell ---
+      - git # Version control
+      - wget # File downloader
+      - aria2 # Lightweight download utility
+      - bootc # Bootable container manager
+      - tmux # Terminal multiplexer
+      - zsh # Z Shell
+      - zsh-autosuggestions # Zsh history suggestions
+      - zsh-syntax-highlighting # Zsh syntax highlighting
+      - vim-enhanced # Advanced Vim editor
+      - htop # Process viewer
+      - distrobox # Container management
+      - fastfetch # System info tool
+      - jq # JSON processor
+      - parallel # Parallel job executor
+      - tealdeer # Shows cheatsheet for terminal commands
+      - libnotify # Provides notify-send CLI
+      - dbus-tools # Provides dbus-send for bootstrap poller
+      
+      # --- Hyprland Ecosystem ---
+      - hyprland # Wayland compositor
+      - hyprpaper # Wallpaper utility
+      - hyprlock # Screen locker
+      - hypridle # Idle daemon
+      - hyprland-guiutils # Hyprland dialog box
+      - waybar # Status bar
+      - rofi-wayland # App launcher
+      - swaync # Notification daemon
+      - wlogout # Logout menu
+      - grim # Screenshot tool
+      - slurp # Screen region selector
+      - wl-clipboard # Clipboard utilities
+      - swappy # Screenshot annotation
+      - cliphist # Clipboard history
+      - nwg-displays # Monitor configuration
+      - nwg-look # GTK theme customization
+      - hyprpolkitagent # Native Hyprland PolicyKit agent
+      - network-manager-applet # Network tray icon
+      - blueman # Bluetooth manager
+      
+      # --- Theming/Qt ---
+      - sddm
+      - adwaita-icon-theme # Standard icon theme
+      - adw-gtk3-theme # Libadwaita theme for GTK3
+      - qt5-qtstyleplugins # Qt style plugins
+      - bibata-cursor-themes # Modern cursor theme
+      - abattis-cantarell-fonts # GNOME default font
+      - qt5-qtgraphicaleffects # Qt graphical effects
+      - qt5-qtquickcontrols2 # Qt Quick Controls 2
+      - qt5-qtwayland # Fixes blurry Wayland apps
+      - qt6-qtwayland # Native Wayland for Qt6
+      - qt5-qtsvg # Qt SVG support
+      - qt5ct # Qt5 configuration tool
+      - qt6ct # Qt6 configuration tool
+      - kvantum # Qt SVG theme engine
+      
+      # --- Networking ---
+      - tailscale # Mesh VPN
+      - iperf3 # Speed test for your local network
+
+      # --- GUI Applications ---
+      - xarchiver # Archive manager
+      - mpv # Media player
+      - eog # Image viewer
+      - pavucontrol # PulseAudio volume control
+      - brightnessctl # Brightness CLI
+      - playerctl # Media player CLI
+      - pamixer # PulseAudio mixer CLI
+      - yad # GUI dialog tool for scripts
+      - gnome-text-editor # Text editor
+
+      # --- Missing Dependencies (Added for base-main) ---
+      - nautilus # File manager
+      - gvfs # Virtual filesystem
+      - gvfs-mtp # Android MTP support
+      - gvfs-smb # SMB/CIFS support
+      - gnome-keyring # Password manager
+      - kitty # Terminal emulator
+      - polkit # Privilege management
+      - xdg-user-dirs # User directory manager
+
+      # --- Portals (Critical for Hyprland/Flatpaks) ---
+      - xdg-desktop-portal-hyprland # Hyprland portal
+      - xdg-desktop-portal-gtk # GTK fallback portal
+
+      # --- Archives & Thumbnails ---
+      - unzip
+      - unrar
+      - zip
+      - p7zip
+      - p7zip-plugins
+      - tar
+      - xz
+      - bzip2
+      - gzip
+      - ffmpegthumbnailer
+
+      # --- Codecs & Multimedia ---
+      - gstreamer1-plugins-ugly-free
+      - gstreamer1-plugins-bad-free-extras
+      - ffmpeg # Pulled automatically from pre-baked RPM Fusion
+      - gstreamer1-plugin-openh264
+      
+      # --- Fonts ---
+      - google-noto-emoji-fonts
+      - rsms-inter-fonts
+      - google-noto-sans-cjk-fonts
+      
+      # --- Sound ---
+      - pipewire
+      - wireplumber
+      - pipewire-alsa
+      - pipewire-pulseaudio
+      - pipewire-utils
+
+      # --- Network / Bluetooth ---
+      - NetworkManager
+      - NetworkManager-tui
+      - NetworkManager-wifi
+      - bluez
+      - bluez-cups
+
+      # --- System Utilities ---
+      - smartmontools
+      - wf-recorder
+
+      # Android tools
+      - android-tools
+
+  # 4. Copy Config Files
+  - type: files
+    files:
+      - source: system
+        destination: /
+
+  # 5. Flatpak Configuration
+  - type: default-flatpaks
+    configurations:
+      - container: system
+        notify: false
+        install:
+          - com.github.tchx84.Flatseal
+          - org.mozilla.firefox
+          - org.gnome.Calculator
+
+  # 6. Fonts
+  - type: fonts
+    fonts:
+      nerd-fonts:
+        - JetBrainsMono
+
+  # 7. Systemd Services
+  - type: systemd
+    system:
+      enabled:
+        - sddm
+        - NetworkManager
+        - bluetooth
+      disabled:
+        # Disable tailscale by default unless you are actively using it, to run "sudo systemctl start tailscaled"
+        - tailscaled
+
+  # 8. Customize OS Name
+  - type: os-release
+    properties:
+      NAME: "GalihOS"
+      PRETTY_NAME: "GalihOS (ublue-os with hyprland) x86_64"
+      ID: "galihos"
+      ID_LIKE: fedora
+      VERSION_ID: "44"
+      VARIANT: "Hyprland Edition"
+      VARIANT_ID: "hyprland"
+      DEFAULT_HOSTNAME: "GalihOS"
+
+  # 9. Sign image
+  - type: signing
