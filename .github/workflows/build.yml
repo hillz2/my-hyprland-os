@@ -9,16 +9,18 @@ on:
 
   pull_request:
   workflow_dispatch: # allow manually triggering builds
+
 concurrency:
   # only run one build at a time
   group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
   cancel-in-progress: true
+
 jobs:
   bluebuild:
     name: Build Custom Image
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       packages: write
       id-token: write
     strategy:
@@ -28,7 +30,13 @@ jobs:
           # !! Add your recipes here
           - recipe.yml
     steps:
-      # the build is fully handled by the reusable github action
+      # Checkout repository so git commands and commit steps work properly
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # The build is fully handled by the reusable github action
       - name: Build Custom Image
         uses: blue-build/github-action@v1.13
         with:
@@ -41,3 +49,61 @@ jobs:
 
           # enabled by default, disable if your image is small and you want faster builds
           maximize_build_space: true
+
+      - name: Update CHANGELOG.md
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: |
+          IMAGE_NAME="ghcr.io/${{ github.repository }}"
+          DATE_STAMP=$(date +'%Y-%m-%d %H:%M:%S')
+          BUILD_ID="${{ github.run_id }}"
+
+          echo "Pulling newly built image to inspect contents..."
+          podman pull -q "$IMAGE_NAME:latest"
+
+          # Extract Kernel Version
+          KERNEL_VER=$(podman run --rm "$IMAGE_NAME:latest" rpm -q kernel --qf "%{VERSION}-%{RELEASE}.%{ARCH}\n" 2>/dev/null || echo "Unknown")
+
+          # Get package list from the newly built image
+          podman run --rm "$IMAGE_NAME:latest" rpm -qa --qf "%{NAME} %{VERSION}-%{RELEASE}\n" | sort > /tmp/current_pkgs.txt
+
+          # If previous changelog package cache exists in container layer or runner, compare against it
+          if [ -f /tmp/prev_pkgs.txt ]; then
+            DIFF_OUTPUT=$(comm -13 /tmp/prev_pkgs.txt /tmp/current_pkgs.txt | awk '{print "- `" $0 "`"}')
+          else
+            DIFF_OUTPUT="- Initial build or baseline tracking enabled."
+          fi
+
+          # Save current package list for future comparisons if caching runner data
+          cp /tmp/current_pkgs.txt /tmp/prev_pkgs.txt
+
+          # Format new entry
+          NEW_ENTRY="## Build Update - ${DATE_STAMP} (Run #${BUILD_ID})
+
+          * **Kernel:** \`${KERNEL_VER}\`
+          * **Image:** \`${IMAGE_NAME}:latest\`
+
+          ### Package Updates / Manifest Summary
+          ${DIFF_OUTPUT:-"- No package changes detected."}
+
+          "
+
+          # Prepend entry to CHANGELOG.md
+          if [ -f CHANGELOG.md ]; then
+            echo "$NEW_ENTRY" | cat - CHANGELOG.md > /tmp/changelog.tmp && mv /tmp/changelog.tmp CHANGELOG.md
+          else
+            echo "# Changelog
+
+          $NEW_ENTRY" > CHANGELOG.md
+          fi
+
+          # Commit and push updated CHANGELOG.md back to the repository
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add CHANGELOG.md
+          
+          if git diff --staged --quiet; then
+            echo "No changes in CHANGELOG.md to commit."
+          else
+            git commit -m "docs: update CHANGELOG.md for build #${BUILD_ID} [skip ci]"
+            git push
+          fi
