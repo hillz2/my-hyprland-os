@@ -96,14 +96,16 @@ jobs:
           $NEW_ENTRY" > CHANGELOG.md
           fi
 
-          # Commit and push updated CHANGELOG.md back to the repository
+          # Configure git author and remote authentication
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
+          git remote set-url origin https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git
+
           git add CHANGELOG.md
           
           if git diff --staged --quiet; then
             echo "No changes in CHANGELOG.md to commit."
           else
             git commit -m "docs: update CHANGELOG.md for build #${BUILD_ID} [skip ci]"
-            git push
+            git push origin HEAD:main
           fi
