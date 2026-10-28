@@ -36,8 +36,8 @@ modules:
       - tealdeer
       - libnotify
       - dbus-tools
-      
-      # --- Hyprland Ecosystem ---
+
+      # --- Hyprland Ecosystem (Bluetooth removed) ---
       - hyprland
       - hyprpaper
       - hyprlock
@@ -56,17 +56,14 @@ modules:
       - nwg-look
       - hyprpolkitagent
       - network-manager-applet
-      - blueman
-      
-      # --- Theming (Pure Wayland / GTK-focused) ---
-      - adwaita-icon-theme
+      # - blueman (Removed)
+
+      # --- Theming (Minimal Dark) ---
       - adw-gtk3-theme
-      - bibata-cursor-themes
-      - abattis-cantarell-fonts
-      - qt5-qtwayland # Minimal Wayland support for Qt apps
+      - qt5-qtwayland
       - qt6-qtwayland
       - qt6ct
-      
+
       # --- Networking ---
       - tailscale
       - iperf3
@@ -80,7 +77,7 @@ modules:
       - playerctl
       - pamixer
       - yad
-      - geany # Lightweight GUI text editor for coding
+      - geany
 
       # --- Essential Base Dependencies ---
       - thunar
@@ -113,12 +110,12 @@ modules:
       - gstreamer1-plugins-bad-free-extras
       - ffmpeg
       - gstreamer1-plugin-openh264
-      
+
       # --- Fonts ---
       - google-noto-emoji-fonts
       - rsms-inter-fonts
       - google-noto-sans-cjk-fonts
-      
+
       # --- Sound ---
       - pipewire
       - wireplumber
@@ -126,14 +123,12 @@ modules:
       - pipewire-pulseaudio
       - pipewire-utils
 
-      # --- Network / Bluetooth ---
+      # --- Network (Bluetooth packages bluez/bluez-cups removed) ---
       - NetworkManager
       - NetworkManager-tui
       - NetworkManager-wifi
-      - bluez
-      - bluez-cups
 
-      # --- System Diagnostics (Kept as requested) ---
+      # --- System Diagnostics ---
       - smartmontools
       - wf-recorder
       - android-tools
@@ -165,9 +160,9 @@ modules:
     system:
       enabled:
         - NetworkManager
-        - bluetooth
       disabled:
         - tailscaled
+        - bluetooth
 
   # 8. Customize OS Name
   - type: os-release
