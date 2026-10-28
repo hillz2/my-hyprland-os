@@ -20,6 +20,7 @@ modules:
     install:
       # --- Core & Shell ---
       - git
+      - gh
       - wget
       - aria2
       - bootc
