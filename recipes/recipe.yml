@@ -10,10 +10,8 @@ modules:
       - enable_copr.sh
       - install_wallust.sh
 
-  # 2. Pre-fetch newer display library from testing
-  - type: script
-    snippets:
-      - rpm-ostree install --enablerepo=updates-testing libdisplay-info
+  # 2. libdisplay-info is already current in F45 stable (0.3.0-2), so the
+  #    old updates-testing pre-fetch is no longer needed.
 
   # 3. Install RPM Packages (Trimmed & Optimized)
   - type: rpm-ostree
@@ -21,7 +19,7 @@ modules:
       # --- Core & Shell ---
       - git
       - gh
-      - wget
+      - wget1-wget # F45 retired wget; shim provides /usr/bin/wget
       - aria2
       - bootc
       - tmux
@@ -34,7 +32,7 @@ modules:
       - fastfetch
       - jq
       - parallel
-      - tealdeer
+      - tldr # tealdeer is not packaged in F45
       - libnotify
       - dbus-tools
 
@@ -45,8 +43,8 @@ modules:
       - hypridle
       - hyprland-guiutils
       - waybar
-      - rofi-wayland
-      - swaync
+      - rofi # F45 rofi 2.0 includes the Wayland backend
+      - SwayNotificationCenter # provides swaync
       - wlogout
       - grim
       - slurp
@@ -98,8 +96,8 @@ modules:
       - unzip
       - unrar
       - zip
-      - p7zip
-      - p7zip-plugins
+      - 7zip # replaces p7zip in F45
+      - 7zip-standalone-all # replaces p7zip-plugins (7zz, all formats)
       - tar
       - xz
       - bzip2
@@ -178,7 +176,7 @@ modules:
       PRETTY_NAME: "GalihOS (Lightweight Hyprland) x86_64"
       ID: "galihos"
       ID_LIKE: fedora
-      VERSION_ID: "44"
+      VERSION_ID: "45"
       VARIANT: "Hyprland Edition"
       VARIANT_ID: "hyprland"
       DEFAULT_HOSTNAME: "GalihOS"

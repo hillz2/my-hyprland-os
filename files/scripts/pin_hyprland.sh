@@ -15,18 +15,19 @@ set -oue pipefail
 #   "[EGL] Command eglCreateContext errored out with EGL_BAD_MATCH"
 # The previous 0.56.2 builds render correctly on both paths.
 #
-# These are the exact RPMs that shipped in the working 44.20261028 (08:00)
+# The F45 COPR still carries the working 0.56.2 builds. These are the F45
+# equivalents of the RPMs that shipped in the working 44.20261028 (08:00)
 # deployment, pulled from the same COPR (lionheartp/Hyprland).
 # Remove this pin once 0.57.x works again on Gen7 Intel graphics.
 
-BASE="https://download.copr.fedorainfracloud.org/results/lionheartp/Hyprland/fedora-44-x86_64"
+BASE="https://download.copr.fedorainfracloud.org/results/lionheartp/Hyprland/fedora-45-x86_64/Packages"
 
 echo "--- Pinning Hyprland to 0.56.2 ---"
 
 rpm-ostree override replace \
-    "${BASE}/10966333-hyprland/hyprland-0.56.2-3.fc44.x86_64.rpm" \
-    "${BASE}/10966333-hyprland/hyprland-uwsm-0.56.2-3.fc44.x86_64.rpm" \
-    "${BASE}/10791543-xdg-desktop-portal-hyprland/xdg-desktop-portal-hyprland-1.4.1-1.fc44.x86_64.rpm"
+    "${BASE}/h/hyprland-0.56.2-3.fc45.x86_64.rpm" \
+    "${BASE}/h/hyprland-uwsm-0.56.2-3.fc45.x86_64.rpm" \
+    "${BASE}/x/xdg-desktop-portal-hyprland-1.4.1-1.fc45.x86_64.rpm"
 
 echo "--- Versions after pin ---"
 rpm -q hyprland hyprland-uwsm xdg-desktop-portal-hyprland
