@@ -19,7 +19,7 @@ modules:
       # --- Core & Shell ---
       - git
       - gh
-      - wget1-wget # F45 retired wget; shim provides /usr/bin/wget
+      # wget is already provided by wget2-wget in the F45 base image
       - aria2
       - bootc
       - tmux
