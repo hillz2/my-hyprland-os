@@ -169,16 +169,15 @@ modules:
         - tailscaled
         - bluetooth
         # F45 base enables kmscon on tty1. It takes DRM master on
-        # /dev/dri/card1, so Aquamarine fails with "Device or resource busy".
-        # getty@tty1 must own tty1 instead (F44 behaviour).
+        # /dev/dri/card1, so Hyprland/Aquamarine fails with
+        # "Device or resource busy". Keep kmscon for the other VTs; let
+        # getty@tty1 own tty1 and autostart Hyprland there (F44 behaviour).
         - kmsconvt@tty1.service
-      masked:
-        - kmsconvt@.service
 
-  # 9. Keep kmscon off tty1 and point autovt@ back at getty
+  # 9. Let getty (not kmscon) own tty1; keep kmscon on other VTs
   - type: script
     scripts:
-      - fix_kmscon.sh
+      - fix_kmscon_tty1.sh
 
   # 10. Customize OS Name
   - type: os-release
