@@ -42,7 +42,11 @@ modules:
       - hyprlock
       - hypridle
       - hyprland-guiutils
-      - waybar
+      # waybar-git (lionheartp/Hyprland COPR) instead of Fedora's waybar:
+      # 0.15.0 sends legacy "dispatch workspace N", which Hyprland's Lua config
+      # manager (hyprland.lua) rejects, so workspace buttons are unclickable.
+      # git builds detect the Lua protocol and dispatch correctly.
+      - waybar-git
       - rofi # F45 rofi 2.0 includes the Wayland backend
       - SwayNotificationCenter # provides swaync
       - wlogout
