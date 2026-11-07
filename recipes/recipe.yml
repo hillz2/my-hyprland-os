@@ -130,6 +130,7 @@ modules:
       - NetworkManager
       - NetworkManager-tui
       - NetworkManager-wifi
+      - speedtest-cli
 
       # --- System Diagnostics ---
       - smartmontools
