@@ -70,6 +70,7 @@ modules:
       # --- Networking ---
       - tailscale
       - iperf3
+      - telnet
 
       # --- GUI Applications ---
       - xarchiver
