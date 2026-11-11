@@ -131,12 +131,16 @@ modules:
       - NetworkManager
       - NetworkManager-tui
       - NetworkManager-wifi
-      - speedtest-cli
 
       # --- System Diagnostics ---
       - smartmontools
       - wf-recorder
       - android-tools
+
+  # 3b. Install the official Ookla Speedtest CLI (not Fedora's speedtest-cli)
+  - type: script
+    scripts:
+      - install_speedtest.sh
 
   # 4. Copy Config Files
   - type: files
