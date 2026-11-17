@@ -169,6 +169,7 @@ modules:
     system:
       enabled:
         - NetworkManager
+        - sshd
       disabled:
         - tailscaled
         - bluetooth
