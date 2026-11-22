@@ -71,6 +71,7 @@ modules:
       - tailscale
       - iperf3
       - telnet
+      - usb_modeswitch # used by the AIC8800D80 udev mode-switch rule
 
       # --- GUI Applications ---
       - xarchiver
@@ -141,6 +142,13 @@ modules:
   - type: script
     scripts:
       - install_speedtest.sh
+
+  # 3c. Build the out-of-tree AIC8800D80 USB Wi-Fi driver (Tenda U11, AX913B,
+  #     ...) against this image's kernel. It is recompiled automatically on
+  #     every image rebuild, so it stays in sync with kernel updates.
+  - type: script
+    scripts:
+      - install_aic8800d80.sh
 
   # 4. Copy Config Files
   - type: files

@@ -1,0 +1,80 @@
+name: aic8800d80 driver
+
+# Fast compile check for the out-of-tree AIC8800D80 Wi-Fi driver, plus a
+# downloadable artifact. The full image build compiles the same script
+# (files/scripts/install_aic8800d80.sh), so this workflow is mainly useful to
+# validate the driver before rebuilding the whole OS image.
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Driver git ref (branch, tag or commit). Empty = pinned commit."
+        required: false
+        default: ""
+  pull_request:
+    paths:
+      - "files/scripts/install_aic8800d80.sh"
+      - ".github/workflows/aic8800d80.yml"
+  push:
+    paths:
+      - "files/scripts/install_aic8800d80.sh"
+      - ".github/workflows/aic8800d80.yml"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  compile:
+    name: Compile for image kernel
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Select image
+        id: image
+        run: |
+          IMAGE="ghcr.io/${{ github.repository }}:latest"
+          if ! podman pull --quiet "$IMAGE"; then
+            echo "::warning::Could not pull $IMAGE; falling back to ghcr.io/ublue-os/base-main:45"
+            IMAGE="ghcr.io/ublue-os/base-main:45"
+            podman pull --quiet "$IMAGE"
+          fi
+          echo "image=$IMAGE" >> "$GITHUB_OUTPUT"
+
+      - name: Compile in image container
+        env:
+          AIC8800_REF: ${{ inputs.ref }}
+        run: |
+          mkdir -p out
+          podman run --rm --user root \
+            --entrypoint /bin/bash \
+            -e AIC8800_REF \
+            -v "$PWD:/repo:ro" \
+            -v "$PWD/out:/out" \
+            "${{ steps.image.outputs.image }}" \
+            -c '
+              set -euo pipefail
+              bash /repo/files/scripts/install_aic8800d80.sh
+
+              KVER=$(rpm -q kernel --qf "%{VERSION}-%{RELEASE}.%{ARCH}\n" | sort -V | tail -n1)
+              echo "Packaging artifacts for kernel ${KVER}"
+
+              tar -C / -czf "/out/aic8800d80-${KVER}.tar.gz" \
+                "usr/lib/modules/${KVER}/kernel/drivers/net/wireless/aic8800" \
+                "usr/lib/modules/${KVER}/kernel/drivers/bluetooth/aic8800" \
+                "usr/lib/udev/rules.d/90-aic8800-mode-switch.rules" \
+                "etc/usb_modeswitch.d/1111:1111" \
+                $(cd /usr/lib/firmware && ls -d aic8800* | sed "s|^|usr/lib/firmware/|")
+            '
+
+      - name: Upload compiled driver
+        uses: actions/upload-artifact@v4
+        with:
+          name: aic8800d80-driver
+          path: out/aic8800d80-*.tar.gz
+          if-no-files-found: error
