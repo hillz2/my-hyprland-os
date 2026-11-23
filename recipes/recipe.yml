@@ -68,6 +68,7 @@ modules:
       - qt6ct
 
       # --- Networking ---
+      - nodejs
       - tailscale
       - iperf3
       - telnet
